@@ -1,0 +1,7 @@
+/* Vendor */
+@import "../vendor/normalize.css";
+@import "../vendor/fonts/inter.css";
+
+/* Blocks */
+@import "../blocks/page/page.css";
+@import "../blocks/container/container.css";
