@@ -1,0 +1,19 @@
+.form__input {
+    width: 100%;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 1px solid rgba(0, 0, 0, .2);
+    padding: 13px 0;
+    margin-bottom: 17px;
+    outline: none;
+    transition: border-bottom-color 200ms ease-in;
+}
+
+.form__input:focus {
+    border-bottom-color: #000;
+}
+
+.form__input:last-of-type {
+    margin-bottom: 0;
+}

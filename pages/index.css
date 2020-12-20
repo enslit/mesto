@@ -19,3 +19,26 @@
 @import "../blocks/profile/__text/profile__text.css";
 @import "../blocks/profile/__name/profile__name.css";
 @import "../blocks/profile/__about/profile__about.css";
+
+@import "../blocks/cards/cards.css";
+@import "../blocks/cards/__list/cards__list.css";
+
+@import "../blocks/card/card.css";
+@import "../blocks/card/__image/card__image.css";
+@import "../blocks/card/__description/card__desription.css";
+@import "../blocks/card/__title/card__title.css";
+@import "../blocks/card/__like/card__like.css";
+@import "../blocks/card/__like/_active/card__like_active.css";
+
+@import "../blocks/footer/footer.css";
+@import "../blocks/footer/__copyright/footer__copyright.css";
+
+@import "../blocks/popup/popup.css";
+@import "../blocks/popup/_opened/popup_opened.css";
+@import "../blocks/popup/__container/popup__container.css";
+@import "../blocks/popup/__title/popup__title.css";
+@import "../blocks/popup/__close/popup__close.css";
+
+@import "../blocks/form/form.css";
+@import "../blocks/form/__input/form__input.css";
+@import "../blocks/form/__save/form__save.css";
