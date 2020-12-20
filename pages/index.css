@@ -12,6 +12,7 @@
 @import "../blocks/btn/btn.css";
 @import "../blocks/btn/_type/_add-card/btn_type_add-card.css";
 @import "../blocks/btn/_type/_edit-profile/btn_type_edit-profile.css";
+@import "../blocks/btn/_type/_close/btn_type_close.css";
 
 @import "../blocks/profile/profile.css";
 @import "../blocks/profile/__avatar/profile__avatar.css";
