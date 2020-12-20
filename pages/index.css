@@ -5,3 +5,6 @@
 /* Blocks */
 @import "../blocks/page/page.css";
 @import "../blocks/container/container.css";
+
+@import "../blocks/header/header.css";
+@import "../blocks/logo/logo.css";
