@@ -8,3 +8,14 @@
 
 @import "../blocks/header/header.css";
 @import "../blocks/logo/logo.css";
+
+@import "../blocks/btn/btn.css";
+@import "../blocks/btn/_type/_add-card/btn_type_add-card.css";
+@import "../blocks/btn/_type/_edit-profile/btn_type_edit-profile.css";
+
+@import "../blocks/profile/profile.css";
+@import "../blocks/profile/__avatar/profile__avatar.css";
+@import "../blocks/profile/__details/profile__details.css";
+@import "../blocks/profile/__text/profile__text.css";
+@import "../blocks/profile/__name/profile__name.css";
+@import "../blocks/profile/__about/profile__about.css";
