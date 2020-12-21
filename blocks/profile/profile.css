@@ -9,5 +9,7 @@
     .profile {
         flex-direction: column;
         text-align: center;
+        padding-top: 42px;
+        padding-bottom: 3px;
     }
 }

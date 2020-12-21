@@ -4,3 +4,10 @@
     border: 1px solid #fff;
     background-image: url(../../../images/pen.svg);
 }
+
+@media screen and (max-width: 767px) {
+    .btn_type_edit-profile {
+        height: 18px;
+        width: 18px;
+    }
+}
