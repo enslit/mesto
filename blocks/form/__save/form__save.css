@@ -17,3 +17,11 @@
 .form__save:hover, .form__save:focus {
     opacity: .8;
 }
+
+@media screen and (max-width: 767px) {
+    .form__save {
+        font-size: 14px;
+        height: 46px;
+        line-height: 46px;
+    }
+}

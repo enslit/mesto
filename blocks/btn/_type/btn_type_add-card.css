@@ -3,13 +3,13 @@
     height: 50px;
     border: 2px solid #fff;
     border-radius: 2px;
-    background-image: url(../../../../images/plus.svg);
+    background-image: url(../../../images/plus.svg);
     margin-left: auto;
 }
 
 @media screen and (max-width: 767px) {
     .btn_type_add-card {
-        margin: 36px auto;
+        margin: 33px auto;
         width: 100%;
     }
 }

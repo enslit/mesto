@@ -8,11 +8,12 @@
 
 @import "../blocks/header/header.css";
 @import "../blocks/logo/logo.css";
+@import "../blocks/logo/__img/logo__img.css";
 
 @import "../blocks/btn/btn.css";
-@import "../blocks/btn/_type/_add-card/btn_type_add-card.css";
-@import "../blocks/btn/_type/_edit-profile/btn_type_edit-profile.css";
-@import "../blocks/btn/_type/_close/btn_type_close.css";
+@import "../blocks/btn/_type/btn_type_add-card.css";
+@import "../blocks/btn/_type/btn_type_edit-profile.css";
+@import "../blocks/btn/_type/btn_type_close.css";
 
 @import "../blocks/profile/profile.css";
 @import "../blocks/profile/__avatar/profile__avatar.css";
@@ -20,6 +21,7 @@
 @import "../blocks/profile/__text/profile__text.css";
 @import "../blocks/profile/__name/profile__name.css";
 @import "../blocks/profile/__about/profile__about.css";
+@import "../blocks/profile/__edit-btn/profile__edit-btn.css";
 
 @import "../blocks/cards/cards.css";
 @import "../blocks/cards/__list/cards__list.css";
