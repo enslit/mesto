@@ -1,39 +1,31 @@
-const $profile = document.querySelector('.profile')
-const $name = $profile.querySelector('.profile__name')
-const $about = $profile.querySelector('.profile__about')
-const $popup = document.querySelector('.popup')
-const $form = $popup.querySelector('.form')
-const $nameInput = $form.querySelector('input[name="name"]')
-const $aboutInput = $form.querySelector('input[name="about"]')
-const $btnEditProfile = $profile.querySelector('.btn_type_edit-profile')
-const $btnClosePopup = $popup.querySelector('.btn_type_close')
+const profile = document.querySelector('.profile')
+const name = profile.querySelector('.profile__name')
+const about = profile.querySelector('.profile__about')
+const popup = document.querySelector('.popup')
+const form = popup.querySelector('.form')
+const nameInput = form.querySelector('.form__input_type_name')
+const aboutInput = form.querySelector('.form__input_type_about')
+const btnEditProfile = profile.querySelector('.btn_type_edit-profile')
+const btnClosePopup = popup.querySelector('.btn_type_close')
 
-const popupIsOpened = () => $popup.classList.contains('popup_opened')
-
-const closePopup = () => $popup.classList.remove('popup_opened')
+const closePopup = () => popup.classList.remove('popup_opened')
 
 const openPopup = () => {
-	$nameInput.value = $name.innerText
-	$aboutInput.value = $about.innerText
-	$popup.classList.add('popup_opened')
-}
-
-const togglePopup = event => {
-	if (event.target === event.currentTarget) {
-		popupIsOpened() ? closePopup() : openPopup()
-	}
+	nameInput.value = name.textContent
+	aboutInput.value = about.textContent
+	popup.classList.add('popup_opened')
 }
 
 const handleFormSubmit = event => {
 	event.preventDefault()
 
-	$name.innerText = $nameInput.value.trim()
-	$about.innerText = $aboutInput.value.trim()
+	name.textContent = nameInput.value
+	about.textContent = aboutInput.value
 
 	closePopup()
 }
 
-$form.addEventListener('submit', handleFormSubmit)
-$popup.addEventListener('click', togglePopup)
-$btnEditProfile.addEventListener('click', togglePopup)
-$btnClosePopup.addEventListener('click', togglePopup)
+form.addEventListener('submit', handleFormSubmit)
+popup.addEventListener('click', closePopup)
+btnEditProfile.addEventListener('click', openPopup)
+btnClosePopup.addEventListener('click', closePopup)
