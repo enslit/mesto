@@ -21,7 +21,6 @@
 @import "../blocks/profile/__text/profile__text.css";
 @import "../blocks/profile/__name/profile__name.css";
 @import "../blocks/profile/__about/profile__about.css";
-@import "../blocks/profile/__edit-btn/profile__edit-btn.css";
 
 @import "../blocks/cards/cards.css";
 @import "../blocks/cards/__list/cards__list.css";
