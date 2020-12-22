@@ -26,6 +26,5 @@ const handleFormSubmit = event => {
 }
 
 form.addEventListener('submit', handleFormSubmit)
-popup.addEventListener('click', closePopup)
 btnEditProfile.addEventListener('click', openPopup)
 btnClosePopup.addEventListener('click', closePopup)
