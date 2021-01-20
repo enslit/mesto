@@ -34,6 +34,7 @@ const addCard = (card) => {
 	cardImg.alt = card.name
 	cardTitle.textContent = card.name
 
+	cardImg.addEventListener('click', onClickCard)
 	likeButton.addEventListener('click', onClickLike)
 	cardDelete.addEventListener('click', onClickCardDelete)
 
@@ -158,6 +159,14 @@ const onClickLike = (event) => {
 
 const onClickCardDelete = (event) => {
 	event.target.closest('.card').parentElement.remove()
+}
+
+const onClickCard = (event) => {
+	const ImagePopupElement = popupTemplate.cloneNode(true)
+	const popup = ImagePopupElement.querySelector('.popup')
+	const title = ImagePopupElement.querySelector('.popup__title')
+	const btnClosePopup = ImagePopupElement.querySelector('.btn_type_close')
+	ImagePopupElement.querySelector('.form').remove()
 }
 
 btnEditProfile.addEventListener('click', openEditProfilePopup)
