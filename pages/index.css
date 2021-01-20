@@ -16,6 +16,7 @@
 @import "../blocks/btn/_type/btn_type_like.css";
 @import "../blocks/btn/_type/btn_type_like-active.css";
 @import "../blocks/btn/_type/btn_type_close.css";
+@import "../blocks/btn/_type/btn_type_delete.css";
 
 @import "../blocks/profile/profile.css";
 @import "../blocks/profile/__avatar/profile__avatar.css";
@@ -27,6 +28,7 @@
 @import "../blocks/cards/__list/cards__list.css";
 
 @import "../blocks/card/card.css";
+@import "../blocks/card/__delete/card__delete.css";
 @import "../blocks/card/__image/card__image.css";
 @import "../blocks/card/__description/card__desription.css";
 @import "../blocks/card/__title/card__title.css";
