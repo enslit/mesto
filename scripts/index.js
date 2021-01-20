@@ -2,6 +2,7 @@ import {initialCards} from './cards.js'
 
 const popupTemplate = document.querySelector('#popupTemplate').content
 const cardTemplate = document.querySelector('#cardTemplate').content
+const cardImageTemplate = document.querySelector('#popupImageTemplate').content
 const profile = document.querySelector('.profile')
 const name = profile.querySelector('.profile__name')
 const about = profile.querySelector('.profile__about')
@@ -162,11 +163,21 @@ const onClickCardDelete = (event) => {
 }
 
 const onClickCard = (event) => {
-	const ImagePopupElement = popupTemplate.cloneNode(true)
+	const ImagePopupElement = cardImageTemplate.cloneNode(true)
 	const popup = ImagePopupElement.querySelector('.popup')
-	const title = ImagePopupElement.querySelector('.popup__title')
+	const img = ImagePopupElement.querySelector('.popup__image')
+	const sign = ImagePopupElement.querySelector('.popup__image-sign')
 	const btnClosePopup = ImagePopupElement.querySelector('.btn_type_close')
-	ImagePopupElement.querySelector('.form').remove()
+
+	const link = event.target.src
+	const title = event.target.closest('.card').querySelector('.card__title').textContent
+	img.src = link
+	sign.textContent = title
+
+	popup.classList.add('popup_opened')
+
+	btnClosePopup.addEventListener('click', closePopup)
+	document.body.append(ImagePopupElement)
 }
 
 btnEditProfile.addEventListener('click', openEditProfilePopup)
