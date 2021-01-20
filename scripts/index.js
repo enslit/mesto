@@ -149,15 +149,24 @@ const onSubmitAddCard = event => {
 
 const initLikeListener = () => {
 	const likeButtons = document.querySelectorAll('.btn_type_like')
+	const cardDelete = document.querySelectorAll('.card__delete')
 
 	likeButtons.forEach(button => {
 		button.addEventListener('click', onClickLike)
+	})
+
+	cardDelete.forEach(button => {
+		button.addEventListener('click', onClickCardDelete)
 	})
 }
 
 const onClickLike = (event) => {
 	const btn = event.target
 	btn.classList.toggle('btn_type_like-active')
+}
+
+const onClickCardDelete = (event) => {
+	event.target.closest('.card').parentElement.remove()
 }
 
 btnEditProfile.addEventListener('click', openEditProfilePopup)
