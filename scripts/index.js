@@ -11,6 +11,7 @@ const cardsList = document.querySelector('.cards__list')
 
 const init = () => {
 	initialCards.forEach(addCard)
+	initLikeListener()
 }
 
 const closePopup = (event) => {
@@ -79,7 +80,7 @@ const openEditProfilePopup = () => {
 	popup.classList.add('popup_opened')
 
 	btnClosePopup.addEventListener('click', closePopup)
-	form.addEventListener('submit', handleProfileFormSubmit)
+	form.addEventListener('submit', onSubmitEditProfile)
 
 	document.body.append(profilePopupElement)
 }
@@ -111,12 +112,12 @@ const openAddCardPopup = () => {
 	popup.classList.add('popup_opened')
 
 	btnClosePopup.addEventListener('click', closePopup)
-	form.addEventListener('submit', handleAddCardFormSubmit)
+	form.addEventListener('submit', onSubmitAddCard)
 
 	document.body.append(CardPopupElement)
 }
 
-const handleProfileFormSubmit = event => {
+const onSubmitEditProfile = event => {
 	event.preventDefault()
 
 	const form = event.target
@@ -126,11 +127,11 @@ const handleProfileFormSubmit = event => {
 	name.textContent = nameInput.value
 	about.textContent = aboutInput.value
 
-	form.removeEventListener('submit', handleProfileFormSubmit)
+	form.removeEventListener('submit', onSubmitEditProfile)
 	closePopup(event)
 }
 
-const handleAddCardFormSubmit = event => {
+const onSubmitAddCard = event => {
 	event.preventDefault()
 
 	const form = event.target
@@ -142,8 +143,21 @@ const handleAddCardFormSubmit = event => {
 		link: linkInput.value,
 	})
 
-	form.removeEventListener('submit', handleAddCardFormSubmit)
+	form.removeEventListener('submit', onSubmitAddCard)
 	closePopup(event)
+}
+
+const initLikeListener = () => {
+	const likeButtons = document.querySelectorAll('.btn_type_like')
+
+	likeButtons.forEach(button => {
+		button.addEventListener('click', onClickLike)
+	})
+}
+
+const onClickLike = (event) => {
+	const btn = event.target
+	btn.classList.toggle('btn_type_like-active')
 }
 
 btnEditProfile.addEventListener('click', openEditProfilePopup)
