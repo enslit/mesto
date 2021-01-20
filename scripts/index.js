@@ -11,7 +11,6 @@ const cardsList = document.querySelector('.cards__list')
 
 const init = () => {
 	initialCards.forEach(addCard)
-	initLikeListener()
 }
 
 const closePopup = (event) => {
@@ -28,10 +27,15 @@ const addCard = (card) => {
 
 	const cardImg = cardElement.querySelector('.card__image')
 	const cardTitle = cardElement.querySelector('.card__title')
+	const likeButton = cardElement.querySelector('.btn_type_like')
+	const cardDelete = cardElement.querySelector('.card__delete')
 
 	cardImg.src = card.link
 	cardImg.alt = card.name
 	cardTitle.textContent = card.name
+
+	likeButton.addEventListener('click', onClickLike)
+	cardDelete.addEventListener('click', onClickCardDelete)
 
 	cardsList.prepend(cardElement)
 }
@@ -145,19 +149,6 @@ const onSubmitAddCard = event => {
 
 	form.removeEventListener('submit', onSubmitAddCard)
 	closePopup(event)
-}
-
-const initLikeListener = () => {
-	const likeButtons = document.querySelectorAll('.btn_type_like')
-	const cardDelete = document.querySelectorAll('.card__delete')
-
-	likeButtons.forEach(button => {
-		button.addEventListener('click', onClickLike)
-	})
-
-	cardDelete.forEach(button => {
-		button.addEventListener('click', onClickCardDelete)
-	})
 }
 
 const onClickLike = (event) => {
