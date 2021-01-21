@@ -121,10 +121,18 @@ const onCardClick = (event) => {
 	if (target.classList.contains('btn_type_like')) {
 		like(target)
 	}
+
+	if (target.classList.contains('card__delete')) {
+		cardDelete(target)
+	}
 }
 
 const like = (btn) => {
 	btn.classList.toggle('btn_type_like-active')
+}
+
+const cardDelete = (btn) => {
+	btn.closest('.card').parentElement.remove()
 }
 
 initCards(initialCards)
