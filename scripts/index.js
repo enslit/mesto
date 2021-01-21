@@ -116,12 +116,24 @@ const onPopupClick = (event) => {
 	}
 }
 
+const onCardClick = (event) => {
+	const {target} = event
+	if (target.classList.contains('btn_type_like')) {
+		like(target)
+	}
+}
+
+const like = (btn) => {
+	btn.classList.toggle('btn_type_like-active')
+}
+
 initCards(initialCards)
 
+cardList.addEventListener('click', onCardClick, true)
 editProfileForm.addEventListener('submit', handleProfileFormSubmit)
 addCardForm.addEventListener('submit', handleAddCardFormSubmit)
 btnEditProfile.addEventListener('click', openEditProfilePopup)
 buttonAddCard.addEventListener('click', openAddCardPopup)
 popups.forEach(popup => {
-	popup.addEventListener('click', onPopupClick)
+	popup.addEventListener('click', onPopupClick, true)
 })
