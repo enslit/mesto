@@ -14,32 +14,17 @@ const init = () => {
 	initialCards.forEach(addCard)
 }
 
-const closePopup = (event) => {
-	const popup = event.target.closest('.popup')
-	const close = popup.querySelector('.btn_type_close')
-
-	close.removeEventListener('click', closePopup)
-	popup.classList.remove('popup_opened')
-	popup.remove()
-}
-
-const addCard = (card) => {
+const createCard = (link, name) => {
 	const cardElement = cardTemplate.cloneNode(true)
 
-	const cardImg = cardElement.querySelector('.card__image')
-	const cardTitle = cardElement.querySelector('.card__title')
-	const likeButton = cardElement.querySelector('.btn_type_like')
-	const cardDelete = cardElement.querySelector('.card__delete')
+	const img = cardElement.querySelector('.card__image')
+	const title = cardElement.querySelector('.card__title')
 
-	cardImg.src = card.link
-	cardImg.alt = card.name
-	cardTitle.textContent = card.name
+	img.src = link
+	img.alt = name
+	title.textContent = name
 
-	cardImg.addEventListener('click', onClickCard)
-	likeButton.addEventListener('click', onClickLike)
-	cardDelete.addEventListener('click', onClickCardDelete)
-
-	cardsList.prepend(cardElement)
+	return cardElement
 }
 
 const createInput = (attrs) => {
@@ -56,74 +41,133 @@ const createInput = (attrs) => {
 		? className + ' ' + modsClassName.join(' ')
 		: className
 
-	return `<input type="${type}" name="${name}" value="${value}" class="${classes}" placeholder="${placeholder}">`
+	const input = document.createElement('input')
+	input.type = type
+	input.name = name
+	input.value = value
+	input.placeholder = placeholder
+	input.className = classes
+
+	return input
+}
+
+const createForm = (name, submitHandler, fields = []) => {
+	const formTemplate = document.querySelector('#form').content
+	const formElement = formTemplate.cloneNode(true)
+	const form = formElement.querySelector('.form')
+
+	formElement.name = name
+
+	fields.reverse().forEach(field => {
+		const input = createInput(field)
+		form.prepend(input)
+	})
+
+	form.addEventListener('submit', submitHandler)
+
+	return formElement
+}
+
+const createPopup = (title, withForm = false, formOptions = {}) => {
+	const popupElement = popupTemplate.cloneNode(true)
+	const $popup = popupElement.querySelector('.popup')
+	const $popupContainer = popupElement.querySelector('.popup__container')
+	const $title = popupElement.querySelector('.popup__title')
+	const $btnClosePopup = popupElement.querySelector('.btn_type_close')
+
+	$title.textContent = 'Редактирование профиля'
+
+	if (withForm) {
+		const {
+			name = 'form',
+			submitHandler = (e) => console.log(`Default handler for ${e.target}`),
+			fields = []
+		} = formOptions
+		const form = createForm(name, submitHandler, fields)
+		$popupContainer.append(form)
+	}
+
+	$popup.classList.add('popup_opened')
+
+	$btnClosePopup.addEventListener('click', closePopup)
+
+	return popupElement
+}
+
+const addCard = ({link, name}) => {
+	const card = createCard(link, name)
+
+	const cardImg = card.querySelector('.card__image')
+	const likeButton = card.querySelector('.btn_type_like')
+	const deleteButton = card.querySelector('.card__delete')
+
+	cardImg.addEventListener('click', onClickCard)
+	likeButton.addEventListener('click', onClickLike)
+	deleteButton.addEventListener('click', onClickDelete)
+
+	cardsList.prepend(card)
+}
+
+const closePopup = (event) => {
+	const popup = event.target.closest('.popup')
+	const close = popup.querySelector('.btn_type_close')
+
+	close.removeEventListener('click', closePopup)
+	popup.classList.remove('popup_opened')
+	popup.remove()
 }
 
 const openEditProfilePopup = () => {
-	const profilePopupElement = popupTemplate.cloneNode(true)
-	const popup = profilePopupElement.querySelector('.popup')
-	const form = profilePopupElement.querySelector('.form')
-	const title = profilePopupElement.querySelector('.popup__title')
-	const btnClosePopup = profilePopupElement.querySelector('.btn_type_close')
+	const title = 'Редактирование профиля'
 
-	form.name = 'edit-profile'
-	title.textContent = 'Редактирование профиля'
-
-	const nameInput = createInput({
+	const nameField = {
 		name: 'name',
 		value: name.textContent,
 		modsClassName: ['form__input_type_name']
-	})
-
-	const aboutInput = createInput({
+	}
+	const aboutField = {
 		name: 'about',
 		value: about.textContent,
 		modsClassName: ['form__input_type_about']
-	})
+	}
+	const fields = [nameField, aboutField]
 
-	form.insertAdjacentHTML('afterbegin', nameInput + aboutInput)
+	const formOptions = {
+		name: 'edit-profile',
+		submitHandler: onSubmitEditProfile,
+		fields
+	}
 
-	popup.classList.add('popup_opened')
-
-	btnClosePopup.addEventListener('click', closePopup)
-	form.addEventListener('submit', onSubmitEditProfile)
-
-	document.body.append(profilePopupElement)
+	const popup = createPopup(title, true, formOptions)
+	document.body.append(popup)
 }
 
 const openAddCardPopup = () => {
-	const CardPopupElement = popupTemplate.cloneNode(true)
-	const popup = CardPopupElement.querySelector('.popup')
-	const title = CardPopupElement.querySelector('.popup__title')
-	const form = CardPopupElement.querySelector('.form')
-	const btnClosePopup = CardPopupElement.querySelector('.btn_type_close')
+	const title = 'Новое место'
 
-	form.name = 'add-card'
-	title.textContent = 'Новое место'
-
-	const nameInput = createInput({
+	const nameField = {
 		name: 'name',
 		placeholder: 'Название',
 		modsClassName: ['form__input_type_name']
-	})
-
-	const linkInput = createInput({
+	}
+	const linkField = {
 		name: 'link',
 		placeholder: 'Ссылка на картинку',
 		modsClassName: ['form__input_type_link']
-	})
+	}
+	const fields = [nameField, linkField]
 
-	form.insertAdjacentHTML('afterbegin', nameInput + linkInput)
+	const formOptions = {
+		name: 'add-card',
+		submitHandler: onSubmitAddCard,
+		fields
+	}
 
-	popup.classList.add('popup_opened')
-
-	btnClosePopup.addEventListener('click', closePopup)
-	form.addEventListener('submit', onSubmitAddCard)
-
-	document.body.append(CardPopupElement)
+	const popup = createPopup(title, true, formOptions)
+	document.body.append(popup)
 }
 
-const onSubmitEditProfile = event => {
+const onSubmitEditProfile = (event) => {
 	event.preventDefault()
 
 	const form = event.target
@@ -137,7 +181,7 @@ const onSubmitEditProfile = event => {
 	closePopup(event)
 }
 
-const onSubmitAddCard = event => {
+const onSubmitAddCard = (event) => {
 	event.preventDefault()
 
 	const form = event.target
@@ -154,11 +198,10 @@ const onSubmitAddCard = event => {
 }
 
 const onClickLike = (event) => {
-	const btn = event.target
-	btn.classList.toggle('btn_type_like-active')
+	event.target.classList.toggle('btn_type_like-active')
 }
 
-const onClickCardDelete = (event) => {
+const onClickDelete = (event) => {
 	event.target.closest('.card').parentElement.remove()
 }
 
