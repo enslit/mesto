@@ -125,6 +125,24 @@ const onCardClick = (event) => {
 	if (target.classList.contains('card__delete')) {
 		cardDelete(target)
 	}
+
+	if (target.classList.contains('card__image')) {
+		const card = target.closest('.card')
+		const link = target.src
+		const title = card.querySelector('.card__title').textContent
+		openImagePopup(link, title)
+	}
+}
+
+const openImagePopup = (link, title) => {
+	const imagePopup = document.querySelector('.popup_type_image')
+	const image = imagePopup.querySelector('.popup__image')
+	const sign = imagePopup.querySelector('.popup__sign')
+	image.src = link
+	image.alt = title
+	sign.textContent = title
+
+	openPopup(imagePopup)
 }
 
 const like = (btn) => {
