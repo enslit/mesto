@@ -15,7 +15,9 @@ const init = () => {
 const initPopup = (content, title = '', type = '') => {
 	const popup = createPopup(content, title, type)
 	document.body.append(popup)
-	openPopup()
+	setTimeout(() => {
+		openPopup()
+	}, 1)
 }
 
 const getTemplateElement = (selector) => {
@@ -156,8 +158,8 @@ const createPopup = (content, title, type) => {
 			container.classList.add('popup__container_image')
 			break
 		default:
-			const title = popupElement.querySelector('.popup__title')
-			title.textContent = title
+			const $title = popupElement.querySelector('.popup__title')
+			$title.textContent = title
 	}
 
 	putContentToPopup(content, container)
