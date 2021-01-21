@@ -8,6 +8,10 @@ const about = profile.querySelector('.profile__about')
 
 const timeout = 500
 
+function hasClass (className) {
+	return this.target.classList.contains(className)
+}
+
 const init = () => {
 	initialCards.forEach(addCard)
 }
@@ -82,8 +86,7 @@ const createInput = (attrs) => {
 }
 
 const createForm = (name, submitHandler) => {
-	const formTemplate = document.querySelector('#form').content
-	const formElement = formTemplate.cloneNode(true)
+	const formElement = getTemplateElement('#form')
 	const form = formElement.querySelector('.form')
 
 	form.name = name
@@ -162,6 +165,8 @@ const createPopup = (content, title, type) => {
 			$title.textContent = title
 	}
 
+	popup.style.transition = `opacity ${timeout}ms linear`
+
 	putContentToPopup(content, container)
 
 	popup.addEventListener('click', closePopup)
@@ -209,26 +214,31 @@ const onSubmitAddCard = (event) => {
 	closePopup(event)
 }
 
-const onClickProfile = ({target}) => {
-	if (target.classList.contains('btn_type_edit-profile')) {
+const onClickProfile = (event) => {
+	event.hasClass = hasClass
+
+	if (event.hasClass('btn_type_edit-profile')) {
 		initPopup(createEditProfileForm(), 'Редактирование профиля')
 	}
 
-	if (target.classList.contains('btn_type_add-card')) {
+	if (event.hasClass('btn_type_add-card')) {
 		initPopup(createAddCardForm(),'Новое место')
 	}
 }
 
-const onClickCardList = ({target}) => {
-	if (target.classList.contains('btn_type_like')) {
+const onClickCardList = (event) => {
+	event.hasClass = hasClass
+	const target = event.target
+
+	if (event.hasClass('btn_type_like')) {
 		target.classList.toggle('btn_type_like-active')
 	}
 
-	if (target.classList.contains('card__delete')) {
+	if (event.hasClass('card__delete')) {
 		target.closest('.card').parentElement.remove()
 	}
 
-	if (target.classList.contains('card__image')) {
+	if (event.hasClass('card__image')) {
 		const title = target.closest('.card').querySelector('.card__title').textContent
 		const content = [
 			createImage(target.src, title),
