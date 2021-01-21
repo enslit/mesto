@@ -48,14 +48,17 @@
           </div>
         </article>
       </li>
-    </template>
+    </template> <!-- END card template -->
 
+    <!-- form template -->
     <template id="form">
       <form class="form">
+        <div class="form__inputs"></div>
         <button type="submit" name="save" class="form__save">Сохранить</button>
       </form>
-    </template>
+    </template> <!-- END form template -->
 
+    <!-- popup template -->
     <template id="popupTemplate">
       <div class="popup">
         <div class="popup__container">
@@ -63,18 +66,9 @@
           <h2 class="popup__title"></h2>
         </div>
       </div>
-    </template>
-
-    <template id="popupImageTemplate">
-      <div class="popup">
-        <div class="popup__container popup__container_image">
-          <img src="" alt="" class="popup__image">
-          <button type="button" aria-label="Закрыть" class="popup__close btn btn_type_close"></button>
-          <h2 class="popup__image-sign"></h2>
-        </div>
-      </div>
-    </template>
+    </template> <!-- END popup template -->
   </div>
+
   <script type="module" src="scripts/index.js"></script>
 </body>
 </html>
