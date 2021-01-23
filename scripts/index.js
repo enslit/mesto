@@ -42,7 +42,7 @@ const handleProfileFormSubmit = event => {
 	name.textContent = nameInput.value
 	about.textContent = aboutInput.value
 
-	closePopup(event)
+	closePopup(popupEditProfile)
 }
 
 const handleAddCardFormSubmit = event => {
@@ -55,7 +55,7 @@ const handleAddCardFormSubmit = event => {
 	const card = createCard({name, link})
 	putCard(card)
 
-	closePopup(event)
+	closePopup(popupAddCard)
 
 	nameField.value = ''
 	linkField.value = ''
@@ -85,8 +85,11 @@ const initCards = (items) => {
 
 const onPopupClick = (event) => {
 	const target = event.target
-	if (target.classList.contains('btn_type_close') || target.classList.contains('popup')) {
-		closePopup(event)
+	if (target.classList.contains('btn_type_close')) {
+		const popup = target.closest('.popup')
+		closePopup(popup)
+	} else if (target.classList.contains('popup')) {
+		closePopup(target)
 	}
 }
 
