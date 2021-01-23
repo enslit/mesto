@@ -66,6 +66,7 @@ const createCard = ({name, link}) => {
 
 	title.textContent = name
 	image.src = link
+	image.alt = name
 
 	return cardElement
 }
