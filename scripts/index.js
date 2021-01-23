@@ -15,8 +15,10 @@ const btnAddCard = profile.querySelector('.btn_type_add-card')
 
 const formAddCard = popupAddCard.querySelector('.form')
 const formEditProfile = popupEditProfile.querySelector('.form')
-const nameInput = formEditProfile.querySelector('.form__input_type_name')
-const aboutInput = formEditProfile.querySelector('.form__input_type_about')
+const inputName = formEditProfile.querySelector('.form__input_type_name')
+const inputAbout = formEditProfile.querySelector('.form__input_type_about')
+const inputNameCard = formAddCard.querySelector('.form__input_type_card-name')
+const inputLink = formAddCard.querySelector('.form__input_type_link')
 
 const closePopup = (popup) => {
 	popup.classList.remove('popup_opened')
@@ -27,8 +29,8 @@ const openPopup = (popup) => {
 }
 
 const openEditProfilePopup = () => {
-	nameInput.value = name.textContent
-	aboutInput.value = about.textContent
+	inputName.value = name.textContent
+	inputAbout.value = about.textContent
 	openPopup(popupEditProfile)
 }
 
@@ -39,26 +41,24 @@ const openAddCardPopup = () => {
 const handleProfileFormSubmit = event => {
 	event.preventDefault()
 
-	name.textContent = nameInput.value
-	about.textContent = aboutInput.value
+	name.textContent = inputName.value
+	about.textContent = inputAbout.value
 
 	closePopup(popupEditProfile)
 }
 
 const handleAddCardFormSubmit = event => {
 	event.preventDefault()
-	const nameField = formAddCard.querySelector('.form__input_type_name')
-	const linkField = formAddCard.querySelector('.form__input_type_link')
-	const name = nameField.value
-	const link = linkField.value
+	const name = inputNameCard.value
+	const link = inputLink.value
 
 	const card = createCard({name, link})
 	putCard(card)
 
 	closePopup(popupAddCard)
 
-	nameField.value = ''
-	linkField.value = ''
+	inputNameCard.value = ''
+	inputLink.value = ''
 }
 
 const createCard = ({name, link}) => {
