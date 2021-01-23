@@ -2,7 +2,7 @@ const cardTemplate = document.querySelector('#cardTemplate').content
 const profile = document.querySelector('.profile')
 const cardList = document.querySelector('.cards__list')
 
-const popups = document.querySelectorAll('.popup')
+const buttonsPopupClose = document.querySelectorAll('.btn_type_close')
 const popupEditProfile = document.querySelector('.popup_type_edit-profile')
 const popupAddCard = document.querySelector('.popup_type_add-card')
 
@@ -87,14 +87,9 @@ const initCards = (items) => {
 	})
 }
 
-const handleClickPopup = (event) => {
-	const target = event.target
-	if (target.classList.contains('btn_type_close')) {
-		const popup = target.closest('.popup')
-		closePopup(popup)
-	} else if (target.classList.contains('popup')) {
-		closePopup(target)
-	}
+const handleClickClose = (event) => {
+	const popup = event.target.closest('.popup')
+	closePopup(popup)
 }
 
 const handlePreviewPicture = (link, title) => {
@@ -122,6 +117,6 @@ formEditProfile.addEventListener('submit', handleProfileFormSubmit)
 formAddCard.addEventListener('submit', handleAddCardFormSubmit)
 btnEditProfile.addEventListener('click', openEditProfilePopup)
 btnAddCard.addEventListener('click', openAddCardPopup)
-popups.forEach(popup => {
-	popup.addEventListener('click', handleClickPopup, true)
+buttonsPopupClose.forEach(btn => {
+	btn.addEventListener('click', handleClickClose)
 })
