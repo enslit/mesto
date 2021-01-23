@@ -56,9 +56,7 @@ const handleAddCardFormSubmit = event => {
 	putCard(card)
 
 	closePopup(popupAddCard)
-
-	inputNameCard.value = ''
-	inputLink.value = ''
+	formAddCard.reset()
 }
 
 const createCard = ({name, link}) => {
