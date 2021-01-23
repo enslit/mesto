@@ -3,7 +3,6 @@ const profile = document.querySelector('.profile')
 const cardList = document.querySelector('.cards__list')
 
 const popups = document.querySelectorAll('.popup')
-const popupImage = document.querySelector('.popup_type_image')
 const popupEditProfile = document.querySelector('.popup_type_edit-profile')
 const popupAddCard = document.querySelector('.popup_type_add-card')
 
@@ -61,12 +60,18 @@ const handleAddCardFormSubmit = event => {
 
 const createCard = ({name, link}) => {
 	const cardElement = cardTemplate.cloneNode(true)
+	const likeButton = cardElement.querySelector('.btn_type_like')
+	const deleteButton = cardElement.querySelector('.btn_type_delete')
 	const title = cardElement.querySelector('.card__title')
 	const image = cardElement.querySelector('.card__image')
 
 	title.textContent = name
 	image.src = link
 	image.alt = name
+
+	likeButton.addEventListener('click', handleLikeCard);
+	deleteButton.addEventListener('click', handleDeleteCard);
+	image.addEventListener('click', () => handlePreviewPicture(link, name));
 
 	return cardElement
 }
@@ -92,25 +97,7 @@ const onPopupClick = (event) => {
 	}
 }
 
-const onCardClick = (event) => {
-	const {target} = event
-	if (target.classList.contains('btn_type_like')) {
-		like(target)
-	}
-
-	if (target.classList.contains('card__delete')) {
-		cardDelete(target)
-	}
-
-	if (target.classList.contains('card__image')) {
-		const card = target.closest('.card')
-		const link = target.src
-		const title = card.querySelector('.card__title').textContent
-		openImagePopup(link, title)
-	}
-}
-
-const openImagePopup = (link, title) => {
+const handlePreviewPicture = (link, title) => {
 	const imagePopup = document.querySelector('.popup_type_image')
 	const image = imagePopup.querySelector('.popup__image')
 	const sign = imagePopup.querySelector('.popup__sign')
@@ -121,17 +108,16 @@ const openImagePopup = (link, title) => {
 	openPopup(imagePopup)
 }
 
-const like = (btn) => {
-	btn.classList.toggle('btn_type_like-active')
+const handleLikeCard = (event) => {
+	event.target.classList.toggle('btn_type_like-active')
 }
 
-const cardDelete = (btn) => {
-	btn.closest('.card').parentElement.remove()
+const handleDeleteCard = (event) => {
+	event.target.closest('.card').parentElement.remove()
 }
 
 initCards(initialCards)
 
-cardList.addEventListener('click', onCardClick, true)
 formEditProfile.addEventListener('submit', handleProfileFormSubmit)
 formAddCard.addEventListener('submit', handleAddCardFormSubmit)
 btnEditProfile.addEventListener('click', openEditProfilePopup)
