@@ -87,7 +87,7 @@ const initCards = (items) => {
 	})
 }
 
-const onPopupClick = (event) => {
+const handleClickPopup = (event) => {
 	const target = event.target
 	if (target.classList.contains('btn_type_close')) {
 		const popup = target.closest('.popup')
@@ -123,5 +123,5 @@ formAddCard.addEventListener('submit', handleAddCardFormSubmit)
 btnEditProfile.addEventListener('click', openEditProfilePopup)
 btnAddCard.addEventListener('click', openAddCardPopup)
 popups.forEach(popup => {
-	popup.addEventListener('click', onPopupClick, true)
+	popup.addEventListener('click', handleClickPopup, true)
 })
