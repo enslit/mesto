@@ -52,7 +52,7 @@ const handleAddCardFormSubmit = event => {
 	const link = inputLink.value
 
 	const card = createCard({name, link})
-	putCard(card)
+	putCard(card, cardList)
 
 	closePopup(popupAddCard)
 	formAddCard.reset()
@@ -76,14 +76,14 @@ const createCard = ({name, link}) => {
 	return cardElement
 }
 
-const putCard = (card) => {
-	cardList.prepend(card)
+const putCard = (card, container) => {
+	container.prepend(card)
 }
 
 const initCards = (items) => {
 	items.forEach(item => {
 		const card = createCard(item)
-		putCard(card)
+		putCard(card, cardList)
 	})
 }
 
