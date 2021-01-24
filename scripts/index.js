@@ -60,12 +60,9 @@ const handleProfileFormSubmit = event => {
 // Обработчик события отправки формы добавления новой карточки
 const handleAddCardFormSubmit = event => {
 	event.preventDefault()
-	// Сохраним полученные данные из полей ввода
-	const name = inputNameCard.value
-	const link = inputLink.value
 
 	// Создаем разметку карточки
-	const card = createCard({name, link})
+	const card = createCard({name: inputNameCard.value, link: inputLink.value})
 	// Вставляем готовую карточку в начало списка карточек
 	putCardToContainer(card, cardsList)
 
