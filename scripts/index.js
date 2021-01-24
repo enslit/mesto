@@ -8,6 +8,9 @@ const cardsList = document.querySelector('.cards__list')
 // Всплывающие окна
 const popupEditProfile = document.querySelector('.popup_type_edit-profile')
 const popupAddCard = document.querySelector('.popup_type_add-card')
+const popupPreviewImage = document.querySelector('.popup_type_image')
+const imgPreview = popupPreviewImage.querySelector('.popup__image')
+const signPreview = popupPreviewImage.querySelector('.popup__sign')
 // Кнопки
 const buttonsPopupClose = document.querySelectorAll('.btn_type_close')
 const btnEditProfile = profile.querySelector('.btn_type_edit-profile')
@@ -115,17 +118,13 @@ const handleClickClose = (event) => {
 
 // Обработчик клика по изображению
 const handlePreviewPicture = (link, title) => {
-	// Получим и запишем элементы из разметки
-	const imagePopup = document.querySelector('.popup_type_image')
-	const image = imagePopup.querySelector('.popup__image')
-	const sign = imagePopup.querySelector('.popup__sign')
-	// Присвоим полученные в параметрах значение элементам из разметки
-	image.src = link
-	image.alt = title
-	sign.textContent = title
+	// Присвоим полученные в параметрах значения
+	imgPreview.src = link
+	imgPreview.alt = title
+	signPreview.textContent = title
 
 	// Покажем всплывающее окно с изображением
-	openPopup(imagePopup)
+	openPopup(popupPreviewImage)
 }
 
 // Обработчик клика по кнопке лайка карточки
