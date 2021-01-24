@@ -135,7 +135,7 @@ const handleLikeCard = (event) => {
 
 // Обработчик клика по кнопке удаления карточки
 const handleDeleteCard = (event) => {
-	event.target.closest('.card').parentElement.remove()
+	event.target.closest('.cards__list-item').remove()
 }
 
 // Инициализируем список карточек из стартового массива
