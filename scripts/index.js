@@ -74,7 +74,9 @@ const handleAddCardFormSubmit = event => {
 }
 
 // Создаем карточку и возвращаем ее
-const createCard = ({name, link}) => {
+const createCard = (card) => {
+	// Получим поля карточки из переданного объекта
+	const {name, link} = card
 	// Клонируем шаблон карточки
 	const cardElement = cardTemplate.cloneNode(true)
 	// Найдем и запишем все элементы карточки необходимые для работы
@@ -91,7 +93,7 @@ const createCard = ({name, link}) => {
 	// Определяем слушатели действий: лайк, удаление и превью изображения
 	likeButton.addEventListener('click', handleLikeCard);
 	deleteButton.addEventListener('click', handleDeleteCard);
-	image.addEventListener('click', () => handlePreviewPicture(link, name));
+	image.addEventListener('click', () => handlePreviewPicture(card));
 
 	return cardElement
 }
@@ -117,7 +119,7 @@ const handleClickClose = (event) => {
 }
 
 // Обработчик клика по изображению
-const handlePreviewPicture = (link, title) => {
+const handlePreviewPicture = ({link, title}) => {
 	// Присвоим полученные в параметрах значения
 	imgPreview.src = link
 	imgPreview.alt = title
