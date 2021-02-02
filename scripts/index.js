@@ -10,7 +10,6 @@ const popupPreviewImage = document.querySelector('.popup_type_image')
 const imgPreview = popupPreviewImage.querySelector('.popup__image')
 const signPreview = popupPreviewImage.querySelector('.popup__sign')
 // Кнопки
-const buttonsPopupClose = document.querySelectorAll('.btn_type_close')
 const btnEditProfile = profile.querySelector('.btn_type_edit-profile')
 const btnAddCard = profile.querySelector('.btn_type_add-card')
 // Формы и их элементы
@@ -25,11 +24,13 @@ const inputLink = formAddCard.querySelector('.form__input_type_link')
 
 // Скрытие переданного всплывающего окна
 const closePopup = (popup) => {
+	removeListenerClickOnPopup(popup)
 	popup.classList.remove('popup_opened')
 }
 
 // Показ переданного всплывающего окна
 const openPopup = (popup) => {
+	setListenerClickOnPopup(popup)
 	popup.classList.add('popup_opened')
 }
 
@@ -106,12 +107,6 @@ const initCards = (items, container) => {
 	})
 }
 
-// Обработчик клика кнопки закрытия всплывающего окна
-const handleClickClose = (event) => {
-	const popup = event.target.closest('.popup')
-	closePopup(popup)
-}
-
 // Обработчик клика по изображению
 const handlePreviewPicture = ({link, title}) => {
 	// Присвоим полученные в параметрах значения
@@ -136,11 +131,29 @@ const handleDeleteCard = (event) => {
 // Инициализируем список карточек из стартового массива
 initCards(initialCards, cardsList)
 
+// Слушатель события клика по всплывающему окну
+const handleClickPopup = (event) => {
+	const {target} = event
+	if (target.classList.contains('btn_type_close')) {
+		const popup = event.target.closest('.popup')
+		closePopup(popup)
+	} else if (target.classList.contains('popup')) {
+		closePopup(target)
+	}
+}
+
+// Добавление слушателя события клика по всплывающему окну
+const setListenerClickOnPopup = (popup) => {
+	popup.addEventListener('click', handleClickPopup, true)
+}
+
+// Удаление слушателя события клика по всплывающему окну
+const removeListenerClickOnPopup = (popup) => {
+	popup.removeEventListener('click', handleClickPopup)
+}
+
 // Инициализация слушателей событий
 formEditProfile.addEventListener('submit', handleProfileFormSubmit)
 formAddCard.addEventListener('submit', handleAddCardFormSubmit)
 btnEditProfile.addEventListener('click', openEditProfilePopup)
 btnAddCard.addEventListener('click', openAddCardPopup)
-buttonsPopupClose.forEach(btn => {
-	btn.addEventListener('click', handleClickClose)
-})
