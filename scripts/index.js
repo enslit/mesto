@@ -24,13 +24,13 @@ const inputLink = formAddCard.querySelector('.form__input_type_link')
 
 // Скрытие переданного всплывающего окна
 const closePopup = (popup) => {
-	removeListenerClickOnPopup(popup)
+	removeListenersPopup(popup)
 	popup.classList.remove('popup_opened')
 }
 
 // Показ переданного всплывающего окна
 const openPopup = (popup) => {
-	setListenerClickOnPopup(popup)
+	setListenersPopup(popup)
 	popup.classList.add('popup_opened')
 }
 
@@ -132,24 +132,31 @@ const handleDeleteCard = (event) => {
 initCards(initialCards, cardsList)
 
 // Слушатель события клика по всплывающему окну
-const handleClickPopup = (event) => {
-	const {target} = event
-	if (target.classList.contains('btn_type_close')) {
-		const popup = event.target.closest('.popup')
-		closePopup(popup)
-	} else if (target.classList.contains('popup')) {
+const handleClickPopup = ({target}) => {
+	if (target.classList.contains('btn_type_close')) { // Клик по кнопке закрытия
+		closePopup(target.closest('.popup'))
+	} else if (target.classList.contains('popup')) { // Клик по оверлею
 		closePopup(target)
 	}
 }
 
-// Добавление слушателя события клика по всплывающему окну
-const setListenerClickOnPopup = (popup) => {
-	popup.addEventListener('click', handleClickPopup, true)
+const handlePressEsc = ({key}) => {
+	// Если нажата кнопка ESC находим открытое окно и закрываем его
+	if (key === 'Escape') {
+		closePopup(document.querySelector('.popup_opened'))
+	}
 }
 
-// Удаление слушателя события клика по всплывающему окну
-const removeListenerClickOnPopup = (popup) => {
+// Добавление слушателей событий для всплывающего окна
+const setListenersPopup = (popup) => {
+	popup.addEventListener('click', handleClickPopup, true)
+	document.addEventListener('keydown', handlePressEsc)
+}
+
+// Удаление слушателей событий для всплывающего окна
+const removeListenersPopup = (popup) => {
 	popup.removeEventListener('click', handleClickPopup)
+	document.removeEventListener('keydown', handlePressEsc)
 }
 
 // Инициализация слушателей событий
