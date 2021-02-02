@@ -1,15 +1,14 @@
 /* Функция включения валидации всех форм.
 *  Принимает объект с селекторами элементов блока формы.
 * */
-const enableValidation = (options = {}) => {
-  // Селекторы определены по умолчанию, но можем переопределить в момент вызова
+const enableValidation = (options) => {
   const {
-    formSelector = '.form', // Блок формы
-    inputSelector = '.form__input', // Поле ввода
-    submitButtonSelector = '.form__save', // Кнопка отправки формы
-    inactiveButtonClass = 'form__save_disabled', // Модификатор кнопки отправки формы
-    inputErrorClass = 'form__input_type_error', // Модификатор поля ввода с невалидным значением
-    errorClass = 'form__input-error_visible' // Модификатор видимости элемента с текстом ошибки
+    formSelector,
+    inputSelector,
+    submitButtonSelector,
+    inactiveButtonClass,
+    inputErrorClass,
+    errorClass
   } = options
 
   // Собираем все формы на странице
@@ -84,6 +83,3 @@ const hideInputError = (form, input, errorClass, inputErrorClass) => {
   error.classList.remove(errorClass);
   error.textContent = '';
 };
-
-// Включаем валидацию. По необходимости можем переопределить селекторы блока формы
-enableValidation()
