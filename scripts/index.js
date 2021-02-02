@@ -118,7 +118,7 @@ const handleClickPopup = ({target}) => {
 
 const handlePressEsc = ({key}) => {
 	// Если нажата кнопка ESC находим открытое окно и закрываем его
-	if (key === 'Escape') {
+	if (key === KEY_ESC) {
 		closePopup(document.querySelector('.popup_opened'))
 	}
 }

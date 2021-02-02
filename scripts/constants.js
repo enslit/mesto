@@ -22,6 +22,8 @@ inputAbout.value = about.textContent
 const inputNameCard = formAddCard.querySelector('.form__input_type_card-name')
 const inputLink = formAddCard.querySelector('.form__input_type_link')
 
+const KEY_ESC = 'Escape'
+
 const validateOptions = {
   formSelector: '.form', // Блок формы
   inputSelector: '.form__input', // Поле ввода
