@@ -1,5 +1,3 @@
-/* Надеюсь не перестарался с комментариями :) */
-
 const cardTemplate = document.querySelector('#cardTemplate').content
 const profile = document.querySelector('.profile')
 const name = profile.querySelector('.profile__name')
@@ -12,7 +10,6 @@ const popupPreviewImage = document.querySelector('.popup_type_image')
 const imgPreview = popupPreviewImage.querySelector('.popup__image')
 const signPreview = popupPreviewImage.querySelector('.popup__sign')
 // Кнопки
-const buttonsPopupClose = document.querySelectorAll('.btn_type_close')
 const btnEditProfile = profile.querySelector('.btn_type_edit-profile')
 const btnAddCard = profile.querySelector('.btn_type_add-card')
 // Формы и их элементы
@@ -27,11 +24,13 @@ const inputLink = formAddCard.querySelector('.form__input_type_link')
 
 // Скрытие переданного всплывающего окна
 const closePopup = (popup) => {
+	removeListenersPopup(popup)
 	popup.classList.remove('popup_opened')
 }
 
 // Показ переданного всплывающего окна
 const openPopup = (popup) => {
+	setListenersPopup(popup)
 	popup.classList.add('popup_opened')
 }
 
@@ -108,12 +107,6 @@ const initCards = (items, container) => {
 	})
 }
 
-// Обработчик клика кнопки закрытия всплывающего окна
-const handleClickClose = (event) => {
-	const popup = event.target.closest('.popup')
-	closePopup(popup)
-}
-
 // Обработчик клика по изображению
 const handlePreviewPicture = ({link, title}) => {
 	// Присвоим полученные в параметрах значения
@@ -138,11 +131,36 @@ const handleDeleteCard = (event) => {
 // Инициализируем список карточек из стартового массива
 initCards(initialCards, cardsList)
 
+// Слушатель события клика по всплывающему окну
+const handleClickPopup = ({target}) => {
+	if (target.classList.contains('btn_type_close')) { // Клик по кнопке закрытия
+		closePopup(target.closest('.popup'))
+	} else if (target.classList.contains('popup')) { // Клик по оверлею
+		closePopup(target)
+	}
+}
+
+const handlePressEsc = ({key}) => {
+	// Если нажата кнопка ESC находим открытое окно и закрываем его
+	if (key === 'Escape') {
+		closePopup(document.querySelector('.popup_opened'))
+	}
+}
+
+// Добавление слушателей событий для всплывающего окна
+const setListenersPopup = (popup) => {
+	popup.addEventListener('click', handleClickPopup, true)
+	document.addEventListener('keydown', handlePressEsc)
+}
+
+// Удаление слушателей событий для всплывающего окна
+const removeListenersPopup = (popup) => {
+	popup.removeEventListener('click', handleClickPopup)
+	document.removeEventListener('keydown', handlePressEsc)
+}
+
 // Инициализация слушателей событий
 formEditProfile.addEventListener('submit', handleProfileFormSubmit)
 formAddCard.addEventListener('submit', handleAddCardFormSubmit)
 btnEditProfile.addEventListener('click', openEditProfilePopup)
 btnAddCard.addEventListener('click', openAddCardPopup)
-buttonsPopupClose.forEach(btn => {
-	btn.addEventListener('click', handleClickClose)
-})
