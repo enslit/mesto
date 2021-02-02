@@ -14,7 +14,3 @@
 .form__input:focus {
     border-bottom-color: #000;
 }
-
-.form__input:invalid {
-    border-bottom-color: #f00;
-}
