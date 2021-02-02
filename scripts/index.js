@@ -74,15 +74,6 @@ const putCardToContainer = (card, container) => {
 	container.prepend(card)
 }
 
-// Создание и добавление карточек в разметку из массива
-const initCards = (items, container) => {
-	// На каждой итерации создаем карточку и добавляем ее в разметку
-	items.forEach(item => {
-		const card = createCard(item)
-		putCardToContainer(card, container)
-	})
-}
-
 // Обработчик клика по изображению
 const handlePreviewPicture = ({link, title}) => {
 	// Присвоим полученные в параметрах значения
@@ -103,9 +94,6 @@ const handleLikeCard = (event) => {
 const handleDeleteCard = (event) => {
 	event.target.closest('.cards__list-item').remove()
 }
-
-// Инициализируем список карточек из стартового массива
-initCards(initialCards, cardsList)
 
 // Слушатель события клика по всплывающему окну
 const handleClickPopup = ({target}) => {
@@ -134,6 +122,12 @@ const removeListenersPopup = (popup) => {
 	popup.removeEventListener('click', handleClickPopup)
 	document.removeEventListener('keydown', handlePressEsc)
 }
+
+// Инициализируем список карточек из стартового массива
+initialCards.forEach(item => {
+	const card = createCard(item)
+	putCardToContainer(card, cardsList)
+})
 
 // Включаем валидацию
 enableValidation(validateOptions)
