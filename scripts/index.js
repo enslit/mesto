@@ -1,5 +1,3 @@
-/* Надеюсь не перестарался с комментариями :) */
-
 const cardTemplate = document.querySelector('#cardTemplate').content
 const profile = document.querySelector('.profile')
 const name = profile.querySelector('.profile__name')
