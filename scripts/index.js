@@ -159,6 +159,9 @@ const removeListenersPopup = (popup) => {
 	document.removeEventListener('keydown', handlePressEsc)
 }
 
+// Включаем валидацию
+enableValidation(validateOptions)
+
 // Инициализация слушателей событий
 formEditProfile.addEventListener('submit', handleProfileFormSubmit)
 formAddCard.addEventListener('submit', handleAddCardFormSubmit)
