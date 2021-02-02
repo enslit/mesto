@@ -12,6 +12,9 @@ const openPopup = (popup) => {
 
 // Обработчик клика кнопки открытия всплывающего окна с форой редактирования профиля
 const openEditProfilePopup = () => {
+	inputName.value = name.textContent
+	inputAbout.value = about.textContent
+
 	openPopup(popupEditProfile)
 }
 
@@ -128,6 +131,10 @@ initialCards.forEach(item => {
 	const card = createCard(item)
 	putCardToContainer(card, cardsList)
 })
+
+// Заполним значения полей ввода перед инициализацией валидации, чтобы кнопка не блокировалась
+inputName.value = name.textContent
+inputAbout.value = about.textContent
 
 // Включаем валидацию
 enableValidation(validateOptions)
