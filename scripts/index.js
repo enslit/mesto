@@ -20,6 +20,8 @@ const formAddCard = popupAddCard.querySelector('.form')
 const formEditProfile = popupEditProfile.querySelector('.form')
 const inputName = formEditProfile.querySelector('.form__input_type_name')
 const inputAbout = formEditProfile.querySelector('.form__input_type_about')
+inputName.value = name.textContent
+inputAbout.value = about.textContent
 const inputNameCard = formAddCard.querySelector('.form__input_type_card-name')
 const inputLink = formAddCard.querySelector('.form__input_type_link')
 
@@ -35,9 +37,6 @@ const openPopup = (popup) => {
 
 // Обработчик клика кнопки открытия всплывающего окна с форой редактирования профиля
 const openEditProfilePopup = () => {
-	// При открытии окна, заполним поля, имя пользователя и обо мне, исходя из текущих данных на странице
-	inputName.value = name.textContent
-	inputAbout.value = about.textContent
 	openPopup(popupEditProfile)
 }
 
