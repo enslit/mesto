@@ -1,4 +1,3 @@
-import Card from './classes/Card.js'
 import {initialCards} from './cards.js'
 import {
 	cardTemplateSelector,
@@ -11,6 +10,7 @@ import {
 	validateOptions,
 	forms
 } from './constants.js'
+import Card from './classes/Card.js'
 import Validator from './classes/Validator.js'
 
 // Обработчик клика кнопки открытия всплывающего окна с форой редактирования профиля
@@ -67,7 +67,6 @@ formEditProfileElements.name.value = profileElements.name.textContent
 formEditProfileElements.about.value = profileElements.about.textContent
 
 // Включаем валидацию
-
 forms.forEach(form => {
 	const validator = new Validator(validateOptions, form)
 	validator.enableValidation()
