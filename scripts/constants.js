@@ -20,6 +20,7 @@ const inputName = formEditProfile.querySelector('.form__input_type_name')
 const inputAbout = formEditProfile.querySelector('.form__input_type_about')
 
 export const cardsList = document.querySelector('.cards__list')
+export const forms = Array.from(document.querySelectorAll('.form'))
 
 export const selectors = {
   cardTemplateSelector: '#cardTemplate'
@@ -47,7 +48,6 @@ export const buttonElements = {
 }
 
 export const validateOptions = {
-  formSelector: '.form', // Блок формы
   inputSelector: '.form__input', // Поле ввода
   submitButtonSelector: '.form__save', // Кнопка отправки формы
   inactiveButtonClass: 'form__save_disabled', // Модификатор кнопки отправки формы

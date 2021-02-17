@@ -8,8 +8,10 @@ import {
 	formAddCardElements,
 	formEditProfileElements,
 	profileElements,
-	validateOptions
+	validateOptions,
+	forms
 } from './constants.js'
+import Validator from './classes/Validator.js'
 
 // Обработчик клика кнопки открытия всплывающего окна с форой редактирования профиля
 const openEditProfilePopup = () => {
@@ -65,7 +67,11 @@ formEditProfileElements.name.value = profileElements.name.textContent
 formEditProfileElements.about.value = profileElements.about.textContent
 
 // Включаем валидацию
-enableValidation(validateOptions)
+
+forms.forEach(form => {
+	const validator = new Validator(validateOptions, form)
+	validator.enableValidation()
+})
 
 // Инициализация слушателей событий
 formEditProfileElements.form.addEventListener('submit', handleProfileFormSubmit)
