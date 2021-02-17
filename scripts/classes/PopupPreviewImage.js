@@ -1,9 +1,9 @@
-import Popup from './Popup.js'
+import {Popup} from './Popup.js'
 
 /*
 * Дочерний класс для работы с всплывающим окном просмотра изображения
 */
-export default class PopupPreviewImage extends Popup {
+export class PopupPreviewImage extends Popup {
   constructor(data, selector) {
     super(selector)
     this._link = data.link

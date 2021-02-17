@@ -2,7 +2,7 @@
 * Класс создания всплывающего окна
 * */
 
-export default class Popup {
+export class Popup {
   constructor(selector) {
     this._popup = document.querySelector(selector)
     this._KEY_ESC = 'Escape'
