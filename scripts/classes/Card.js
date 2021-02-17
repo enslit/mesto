@@ -1,14 +1,13 @@
-import {PopupPreviewImage} from './Popup'
-
 /*
 * Класс создания карточки с изображением
 * */
 
 class Card {
-  constructor(data, selector) {
+  constructor(data, selector, cb) {
     this._selector = selector
     this._name = data.name
     this._link = data.link
+    this._callback = cb
     this._isLiked = false
   }
 
@@ -37,9 +36,8 @@ class Card {
       link: this._link,
       title: this._name
     }
-    // Создаю новый экземпляр класса... мне кажется я зря эту зависимость сюда добавил
-    // FIXME Избавиться от зависимости постороннего класса
-    new PopupPreviewImage(previewData, '.popup_type_image').open()
+    
+    this._callback(previewData)
   }
 
   // Устанавливаем слушатели событий
