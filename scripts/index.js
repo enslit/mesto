@@ -8,7 +8,8 @@ import {
 	formEditProfileElements,
 	profileElements,
 	validateOptions,
-	forms
+	forms,
+	openPreviewPicture
 } from './constants.js'
 import Card from './classes/Card.js'
 import Validator from './classes/Validator.js'
@@ -43,7 +44,7 @@ const handleAddCardFormSubmit = event => {
 		name: formAddCardElements.name.value,
 		link: formAddCardElements.link.value
 	}
-	const card = new Card(cardData, cardTemplateSelector).getCard()
+	const card = new Card(cardData, cardTemplateSelector, openPreviewPicture).getCard()
 	// Вставляем готовую карточку в начало списка карточек
 	putCardToContainer(card, cardsList)
 
@@ -58,7 +59,7 @@ const putCardToContainer = (card, container) => {
 
 // Инициализируем список карточек из стартового массива
 initialCards.forEach(item => {
-	const card = new Card(item, cardTemplateSelector).getCard()
+	const card = new Card(item, cardTemplateSelector, openPreviewPicture).getCard()
 	putCardToContainer(card, cardsList)
 })
 
