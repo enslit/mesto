@@ -1,28 +1,52 @@
-const cardTemplate = document.querySelector('#cardTemplate').content
+import {Popup} from './classes/Popup'
+
+const addCard = new Popup('.popup_type_add-card')
+const editProfile = new Popup('.popup_type_edit-profile')
+const popupEditProfileElement = editProfile.getElement()
+const popupAddCardElement = addCard.getElement()
+
 const profile = document.querySelector('.profile')
 const name = profile.querySelector('.profile__name')
 const about = profile.querySelector('.profile__about')
-const cardsList = document.querySelector('.cards__list')
-// Всплывающие окна
-const popupEditProfile = document.querySelector('.popup_type_edit-profile')
-const popupAddCard = document.querySelector('.popup_type_add-card')
-const popupPreviewImage = document.querySelector('.popup_type_image')
-const imgPreview = popupPreviewImage.querySelector('.popup__image')
-const signPreview = popupPreviewImage.querySelector('.popup__sign')
-// Кнопки
 const btnEditProfile = profile.querySelector('.btn_type_edit-profile')
 const btnAddCard = profile.querySelector('.btn_type_add-card')
-// Формы и их элементы
-const formAddCard = popupAddCard.querySelector('.form')
-const formEditProfile = popupEditProfile.querySelector('.form')
-const inputName = formEditProfile.querySelector('.form__input_type_name')
-const inputAbout = formEditProfile.querySelector('.form__input_type_about')
+
+const formAddCard = popupAddCardElement.querySelector('.form')
 const inputNameCard = formAddCard.querySelector('.form__input_type_card-name')
 const inputLink = formAddCard.querySelector('.form__input_type_link')
 
-const KEY_ESC = 'Escape'
+const formEditProfile = popupEditProfileElement.querySelector('.form')
+const inputName = formEditProfile.querySelector('.form__input_type_name')
+const inputAbout = formEditProfile.querySelector('.form__input_type_about')
 
-const validateOptions = {
+export const cardsList = document.querySelector('.cards__list')
+
+export const selectors = {
+  cardTemplateSelector: '#cardTemplate'
+}
+
+export const formAddCardElements = {
+  form: formAddCard,
+  name: inputNameCard,
+  link: inputLink
+}
+
+export const formEditProfileElements = {
+  form: formEditProfile,
+  name: inputName,
+  about: inputAbout
+}
+
+export const profileElements = {name, about}
+
+export const popupElements = {editProfile, addCard}
+
+export const buttonElements = {
+  editProfile: btnEditProfile,
+  addCard: btnAddCard
+}
+
+export const validateOptions = {
   formSelector: '.form', // Блок формы
   inputSelector: '.form__input', // Поле ввода
   submitButtonSelector: '.form__save', // Кнопка отправки формы
