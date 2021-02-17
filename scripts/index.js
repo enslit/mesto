@@ -44,6 +44,7 @@ const handleAddCardFormSubmit = event => {
 		name: formAddCardElements.name.value,
 		link: formAddCardElements.link.value
 	}
+
 	const card = new Card(cardData, cardTemplateSelector, openPreviewPicture).getCard()
 	// Вставляем готовую карточку в начало списка карточек
 	putCardToContainer(card, cardsList)
