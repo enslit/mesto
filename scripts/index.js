@@ -1,7 +1,7 @@
 import Card from './classes/Card.js'
 import {initialCards} from './cards.js'
 import {
-	selectors,
+	cardTemplateSelector,
 	popupElements,
 	cardsList,
 	buttonElements,
@@ -43,7 +43,7 @@ const handleAddCardFormSubmit = event => {
 		name: formAddCardElements.name.value,
 		link: formAddCardElements.link.value
 	}
-	const card = new Card(cardData, selectors.cardTemplateSelector).getCard()
+	const card = new Card(cardData, cardTemplateSelector).getCard()
 	// Вставляем готовую карточку в начало списка карточек
 	putCardToContainer(card, cardsList)
 
@@ -58,7 +58,7 @@ const putCardToContainer = (card, container) => {
 
 // Инициализируем список карточек из стартового массива
 initialCards.forEach(item => {
-	const card = new Card(item, selectors.cardTemplateSelector).getCard()
+	const card = new Card(item, cardTemplateSelector).getCard()
 	putCardToContainer(card, cardsList)
 })
 

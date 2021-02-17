@@ -22,9 +22,7 @@ const inputAbout = formEditProfile.querySelector('.form__input_type_about')
 export const cardsList = document.querySelector('.cards__list')
 export const forms = Array.from(document.querySelectorAll('.form'))
 
-export const selectors = {
-  cardTemplateSelector: '#cardTemplate'
-}
+export const cardTemplateSelector = '#cardTemplate'
 
 export const formAddCardElements = {
   form: formAddCard,
