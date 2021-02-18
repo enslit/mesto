@@ -3,6 +3,7 @@ import {PopupPreviewImage} from './classes/PopupPreviewImage.js'
 // Объекты всплывающих окон редактирования профиля и добавления карточки
 const addCard = new Popup('.popup_type_add-card')
 const editProfile = new Popup('.popup_type_edit-profile')
+const previewPicture = new PopupPreviewImage('.popup_type_image')
 // Элементы всплывающих окон
 const popupEditProfileElement = editProfile.getElement()
 const popupAddCardElement = addCard.getElement()
@@ -22,11 +23,6 @@ const inputName = formEditProfile.querySelector('.form__input_type_name')
 const inputAbout = formEditProfile.querySelector('.form__input_type_about')
 
 /* ------------ EXPORTS --------------- */
-// Callback обработчика клика на изображение
-export const openPreviewPicture = (data) => {
-  new PopupPreviewImage(data, '.popup_type_image').open()
-}
-
 // Элемент списка карточек
 export const cardsList = document.querySelector('.cards__list')
 
@@ -54,7 +50,7 @@ export const formEditProfileElements = {
 export const profileElements = {name, about}
 
 // Всплывающие окна
-export const popupElements = {editProfile, addCard}
+export const popupElements = {editProfile, addCard, previewPicture}
 
 // Кнопки
 export const buttonElements = {
