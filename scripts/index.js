@@ -12,7 +12,7 @@ import {
 	openPreviewPicture
 } from './constants.js'
 import Card from './classes/Card.js'
-import Validator from './classes/Validator.js'
+import FormValidator from './classes/FormValidator.js'
 
 // Обработчик клика кнопки открытия всплывающего окна с форой редактирования профиля
 const openEditProfilePopup = () => {
@@ -45,7 +45,8 @@ const handleAddCardFormSubmit = event => {
 		link: formAddCardElements.link.value
 	}
 
-	const card = new Card(cardData, cardTemplateSelector, openPreviewPicture).getCard()
+	const card = createCard(cardData)
+
 	// Вставляем готовую карточку в начало списка карточек
 	putCardToContainer(card, cardsList)
 
@@ -58,9 +59,14 @@ const putCardToContainer = (card, container) => {
 	container.prepend(card)
 }
 
+// Создает карточку
+const createCard = (cardData) => {
+	return new Card(cardData, cardTemplateSelector, openPreviewPicture).getCard()
+}
+
 // Инициализируем список карточек из стартового массива
 initialCards.forEach(item => {
-	const card = new Card(item, cardTemplateSelector, openPreviewPicture).getCard()
+	const card = createCard(item)
 	putCardToContainer(card, cardsList)
 })
 
@@ -70,7 +76,7 @@ formEditProfileElements.about.value = profileElements.about.textContent
 
 // Включаем валидацию
 forms.forEach(form => {
-	const validator = new Validator(validateOptions, form)
+	const validator = new FormValidator(validateOptions, form)
 	validator.enableValidation()
 })
 

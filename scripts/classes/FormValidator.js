@@ -3,7 +3,7 @@
 * Валидация проводится согласно указанным атрибутам в html разметке
 * */
 
-class Validator {
+class FormValidator {
   constructor(selectors, formElement) {
     this._formElement = formElement // Элемент формы
     this._inputErrorClass = selectors.inputErrorClass // Модификатор поля ввода с невалидным значением
@@ -85,4 +85,4 @@ class Validator {
   }
 }
 
-export default Validator
+export default FormValidator
