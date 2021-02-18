@@ -44,7 +44,7 @@ const handleAddCardFormSubmit = event => {
 		name: formAddCardElements.name.value,
 		link: formAddCardElements.link.value
 	}
-	const card = new Card(cardData, cardTemplateSelector, openPreviewPicture).getCard()
+	const card = createCard(cardData)
 	// Вставляем готовую карточку в начало списка карточек
 	putCardToContainer(card, cardsList)
 
@@ -57,9 +57,14 @@ const putCardToContainer = (card, container) => {
 	container.prepend(card)
 }
 
+// Создает карточку
+const createCard = (cardData) => {
+	return new Card(cardData, cardTemplateSelector, openPreviewPicture).getCard()
+}
+
 // Инициализируем список карточек из стартового массива
 initialCards.forEach(item => {
-	const card = new Card(item, cardTemplateSelector, openPreviewPicture).getCard()
+	const card = createCard(item)
 	putCardToContainer(card, cardsList)
 })
 
