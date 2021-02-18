@@ -12,7 +12,7 @@ import {
 	openPreviewPicture
 } from './constants.js'
 import Card from './classes/Card.js'
-import Validator from './classes/Validator.js'
+import FormValidator from './classes/FormValidator.js'
 
 // Обработчик клика кнопки открытия всплывающего окна с форой редактирования профиля
 const openEditProfilePopup = () => {
@@ -69,7 +69,7 @@ formEditProfileElements.about.value = profileElements.about.textContent
 
 // Включаем валидацию
 forms.forEach(form => {
-	const validator = new Validator(validateOptions, form)
+	const validator = new FormValidator(validateOptions, form)
 	validator.enableValidation()
 })
 
