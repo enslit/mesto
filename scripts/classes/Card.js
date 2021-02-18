@@ -36,7 +36,7 @@ class Card {
       link: this._link,
       title: this._name
     }
-
+    
     this._callback(previewData)
   }
 
