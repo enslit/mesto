@@ -4,24 +4,18 @@ import {Popup} from './Popup.js'
 * Дочерний класс для работы с всплывающим окном просмотра изображения
 */
 export class PopupPreviewImage extends Popup {
-  constructor(data, selector) {
-    super(selector)
-    this._link = data.link
-    this._title = data.title
+  constructor(selector) {
+    super(selector);
+    // Получим вложенные элементы изображения и подписи
+    this._imgPreview = super.getElement().querySelector('.popup__image')
+    this._signPreview = super.getElement().querySelector('.popup__sign')
   }
-
   // Перегрузка метода
-  open() {
-    // Получим элемент всплывающего окна, вложенные элементы изображения и подписи
-    const popup = super.getElement()
-    const imgPreview = popup.querySelector('.popup__image')
-    const signPreview = popup.querySelector('.popup__sign')
-
-    // Присвоим полученные в конструкторе значения
-    imgPreview.src = this._link
-    imgPreview.alt = this._title
-    signPreview.textContent = this._title
-
+  open({link, title}) {
+    // Присвоим полученные значения
+    this._imgPreview.src = link
+    this._imgPreview.alt = title
+    this._signPreview.textContent = title
     // Метод родителя
     super.open()
   }

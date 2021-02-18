@@ -8,8 +8,7 @@ import {
 	formEditProfileElements,
 	profileElements,
 	validateOptions,
-	forms,
-	openPreviewPicture
+	forms
 } from './constants.js'
 import Card from './classes/Card.js'
 import FormValidator from './classes/FormValidator.js'
@@ -22,6 +21,11 @@ const openEditProfilePopup = () => {
 // Обработчик клика кнопки открытия всплывающего окна с формой добавления новой карточки
 const openAddCardPopup = () => {
 	popupElements.addCard.open()
+}
+
+// Callback обработчика клика на изображение
+export const openPreviewPicture = (data) => {
+	popupElements.previewPicture.open(data)
 }
 
 // Обработчик события отправки формы редактирования профиля
