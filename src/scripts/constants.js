@@ -1,5 +1,5 @@
-import {Popup} from './classes/Popup.js'
-import {PopupPreviewImage} from './classes/PopupPreviewImage.js'
+import {Popup} from '../components/Popup.js'
+import {PopupPreviewImage} from '../components/PopupPreviewImage.js'
 // Объекты всплывающих окон редактирования профиля и добавления карточки
 const addCard = new Popup('.popup_type_add-card')
 const editProfile = new Popup('.popup_type_edit-profile')
