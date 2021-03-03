@@ -1,4 +1,4 @@
-import {initialCards} from './cards.js'
+import {initialCards} from './scripts/cards.js'
 import {
 	cardTemplateSelector,
 	popupElements,
@@ -9,9 +9,10 @@ import {
 	profileElements,
 	validateOptions,
 	forms
-} from './constants.js'
-import Card from './classes/Card.js'
-import FormValidator from './classes/FormValidator.js'
+} from './scripts/constants.js'
+import Card from './components/Card.js'
+import FormValidator from './components/FormValidator.js'
+import './pages/index.css'
 
 // Обработчик клика кнопки открытия всплывающего окна с форой редактирования профиля
 const openEditProfilePopup = () => {
