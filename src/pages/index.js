@@ -4,7 +4,6 @@ import {
 	popupElements,
 	cardsListSelector,
 	buttonElements,
-	formAddCardElements,
 	formEditProfileElements,
 	profileElements,
 	validateOptions,
@@ -14,15 +13,11 @@ import Card from '../components/Card.js'
 import FormValidator from '../components/FormValidator.js'
 import Section from '../components/Section.js'
 import './index.css'
+import PopupWithForm from '../components/PopupWithForm'
 
 // Обработчик клика кнопки открытия всплывающего окна с форой редактирования профиля
 const openEditProfilePopup = () => {
 	popupElements.editProfile.open()
-}
-
-// Обработчик клика кнопки открытия всплывающего окна с формой добавления новой карточки
-const openAddCardPopup = () => {
-	popupElements.addCard.open()
 }
 
 // Callback обработчика клика на изображение
@@ -42,22 +37,10 @@ const handleProfileFormSubmit = event => {
 }
 
 // Обработчик события отправки формы добавления новой карточки
-const handleAddCardFormSubmit = event => {
-	event.preventDefault()
-
-	// Создаем разметку карточки
-	const cardData = {
-		name: formAddCardElements.name.value,
-		link: formAddCardElements.link.value
-	}
-
-	const card = createCard(cardData)
-
+const handleAddCardFormSubmit = (values) => {
+	const card = createCard(values)
 	// Вставляем готовую карточку в начало списка карточек
 	cardList.addItem(card)
-
-	popupElements.addCard.close()
-	formAddCardElements.form.reset()
 }
 
 // Создает карточку
@@ -76,6 +59,8 @@ const cardList = new Section({
 
 cardList.renderElements()
 
+const formAddCard = new PopupWithForm(popupElements.addCard, handleAddCardFormSubmit)
+
 // Заполним значения полей ввода перед инициализацией валидации, чтобы кнопка не блокировалась
 formEditProfileElements.name.value = profileElements.name.textContent
 formEditProfileElements.about.value = profileElements.about.textContent
@@ -88,6 +73,5 @@ forms.forEach(form => {
 
 // Инициализация слушателей событий
 formEditProfileElements.form.addEventListener('submit', handleProfileFormSubmit)
-formAddCardElements.form.addEventListener('submit', handleAddCardFormSubmit)
 buttonElements.editProfile.addEventListener('click', openEditProfilePopup)
-buttonElements.addCard.addEventListener('click', openAddCardPopup)
+buttonElements.addCard.addEventListener('click', () => formAddCard.open())

@@ -1,22 +1,17 @@
 import {Popup} from '../components/Popup.js'
 import {PopupPreviewImage} from '../components/PopupPreviewImage.js'
 // Объекты всплывающих окон редактирования профиля и добавления карточки
-const addCard = new Popup('.popup_type_add-card')
 const editProfile = new Popup('.popup_type_edit-profile')
 const previewPicture = new PopupPreviewImage('.popup_type_image')
 // Элементы всплывающих окон
 const popupEditProfileElement = editProfile.getElement()
-const popupAddCardElement = addCard.getElement()
 // Элементы блока профиля
 const profile = document.querySelector('.profile')
 const name = profile.querySelector('.profile__name')
 const about = profile.querySelector('.profile__about')
 const btnEditProfile = profile.querySelector('.btn_type_edit-profile')
 const btnAddCard = profile.querySelector('.btn_type_add-card')
-// Элементы формы добавления карточки
-const formAddCard = popupAddCardElement.querySelector('.form')
-const inputNameCard = formAddCard.querySelector('.form__input_type_card-name')
-const inputLink = formAddCard.querySelector('.form__input_type_link')
+
 // Элементы формы редактирования профиля
 const formEditProfile = popupEditProfileElement.querySelector('.form')
 const inputName = formEditProfile.querySelector('.form__input_type_name')
@@ -32,13 +27,6 @@ export const forms = Array.from(document.querySelectorAll('.form'))
 // Селектор шаблона карточки
 export const cardTemplateSelector = '#cardTemplate'
 
-// Элементы формы добавления карточки
-export const formAddCardElements = {
-  form: formAddCard,
-  name: inputNameCard,
-  link: inputLink
-}
-
 // Элементы формы редактирования профиля
 export const formEditProfileElements = {
   form: formEditProfile,
@@ -50,7 +38,10 @@ export const formEditProfileElements = {
 export const profileElements = {name, about}
 
 // Всплывающие окна
-export const popupElements = {editProfile, addCard, previewPicture}
+export const popupElements = {
+  editProfile,
+  addCard: '.popup_type_add-card',
+  previewPicture}
 
 // Кнопки
 export const buttonElements = {

@@ -1,6 +1,7 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const {CleanWebpackPlugin} = require('clean-webpack-plugin')
+const {SourceMapDevToolPlugin} = require('webpack')
 const path = require('path')
 
 module.exports = {
@@ -19,6 +20,7 @@ module.exports = {
     port: 3001,
     open: true,
   },
+  devtool: false,
   module: {
     rules: [
       {
@@ -45,6 +47,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'src', 'index.html')
     }),
-    new MiniCssExtractPlugin()
+    new MiniCssExtractPlugin(),
+    new SourceMapDevToolPlugin({}),
   ]
 }

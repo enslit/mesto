@@ -24,7 +24,7 @@ export class Popup {
   }
 
   // Назначаем слушателей событий
-  _setListenersPopup() {
+  setListenersPopup() {
     // Биндим для сохранения контекста
     this._handleClickPopup = this._handleClickPopup.bind(this)
     this._handlePressEsc = this._handlePressEsc.bind(this)
@@ -34,20 +34,20 @@ export class Popup {
   }
 
   // Удаляем слушателей событий
-  _removeListenersPopup() {
+  removeListenersPopup() {
     this._popup.removeEventListener('click', this._handleClickPopup)
     document.removeEventListener('keydown', this._handlePressEsc)
   }
 
   // Показывает окно
   open() {
-    this._setListenersPopup()
+    this.setListenersPopup()
     this._popup.classList.add('popup_opened')
   }
 
   // Закрывает окно
   close() {
-    this._removeListenersPopup()
+    this.removeListenersPopup()
     this._popup.classList.remove('popup_opened')
   }
 

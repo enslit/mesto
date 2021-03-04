@@ -60,13 +60,6 @@ class FormValidator {
 
   // Устанавливает слушатели событий
   _setListeners() {
-    // Слушатель отправки формы
-    this._formElement.addEventListener('submit', (event) => {
-      event.preventDefault()
-      // В момент добавления карточки выполним сброс состояния кнопки
-      this._toggleButtonState()
-    })
-
     // Слушатель ввода на все поля
     this._inputs.forEach(input => {
       input.addEventListener('input', () => {
