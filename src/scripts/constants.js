@@ -23,8 +23,8 @@ const inputName = formEditProfile.querySelector('.form__input_type_name')
 const inputAbout = formEditProfile.querySelector('.form__input_type_about')
 
 /* ------------ EXPORTS --------------- */
-// Элемент списка карточек
-export const cardsList = document.querySelector('.cards__list')
+// Cелектор списка карточек
+export const cardsListSelector = '.cards__list'
 
 // Элементы всех форм на странице
 export const forms = Array.from(document.querySelectorAll('.form'))

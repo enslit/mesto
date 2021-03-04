@@ -2,7 +2,7 @@ import {initialCards} from '../scripts/cards.js'
 import {
 	cardTemplateSelector,
 	popupElements,
-	cardsList,
+	cardsListSelector,
 	buttonElements,
 	formAddCardElements,
 	formEditProfileElements,
@@ -12,6 +12,7 @@ import {
 } from '../scripts/constants.js'
 import Card from '../components/Card.js'
 import FormValidator from '../components/FormValidator.js'
+import Section from '../components/Section.js'
 import './index.css'
 
 // Обработчик клика кнопки открытия всплывающего окна с форой редактирования профиля
@@ -53,27 +54,27 @@ const handleAddCardFormSubmit = event => {
 	const card = createCard(cardData)
 
 	// Вставляем готовую карточку в начало списка карточек
-	putCardToContainer(card, cardsList)
+	cardList.addItem(card)
 
 	popupElements.addCard.close()
 	formAddCardElements.form.reset()
 }
 
-// Добавление карточки в переданный контейнер
-const putCardToContainer = (card, container) => {
-	container.prepend(card)
-}
-
 // Создает карточку
 const createCard = (cardData) => {
-	return new Card(cardData, cardTemplateSelector, openPreviewPicture).getCard()
+	const card = new Card(cardData, cardTemplateSelector, openPreviewPicture)
+	return card.getCard()
 }
 
-// Инициализируем список карточек из стартового массива
-initialCards.forEach(item => {
-	const card = createCard(item)
-	putCardToContainer(card, cardsList)
-})
+const cardList = new Section({
+	items: initialCards,
+	renderer: (item) => {
+		const card = createCard(item)
+		cardList.addItem(card)
+	}
+}, cardsListSelector)
+
+cardList.renderElements()
 
 // Заполним значения полей ввода перед инициализацией валидации, чтобы кнопка не блокировалась
 formEditProfileElements.name.value = profileElements.name.textContent
