@@ -16,6 +16,15 @@ export default class PopupWithForm extends Popup{
     return values;
   }
 
+  setInitValues(values) {
+    for (let value in values) {
+      if (values.hasOwnProperty(value)) {
+        const el = this._form.querySelector(`.form__input_type_${value}`)
+        el.value = values[value]
+      }
+    }
+  }
+
   _handleSubmitForm(evt) {
     evt.preventDefault();
     this._cb(this._getInputValues());
@@ -31,6 +40,10 @@ export default class PopupWithForm extends Popup{
   removeListenersPopup() {
     super.removeListenersPopup();
     this._form.removeEventListener('submit',  this._handleSubmitForm)
+  }
+
+  open() {
+    super.open();
   }
 
   close() {
