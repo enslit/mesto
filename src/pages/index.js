@@ -2,14 +2,14 @@ import Card from '../components/Card.js'
 import FormValidator from '../components/FormValidator.js'
 import PopupWithForm from '../components/PopupWithForm'
 import Section from '../components/Section.js'
-import {initialCards} from '../scripts/cards.js'
+import {initialCards} from '../utils/cards.js'
 import {
 	userInfo,
 	popupPreviewPicture,
 	selectors,
 	buttonAddCard,
 	buttonEditProfile
-} from '../scripts/constants.js'
+} from '../utils/constants.js'
 import './index.css'
 
 // Callback обработчика клика на изображение
