@@ -7,7 +7,7 @@ import {
 	formEditProfileElements,
 	profileElements,
 	validateOptions,
-	forms
+	popupAddCardSelector,
 } from '../scripts/constants.js'
 import Card from '../components/Card.js'
 import FormValidator from '../components/FormValidator.js'
@@ -49,29 +49,30 @@ const createCard = (cardData) => {
 	return card.getCard()
 }
 
+// Создаем объект контейнера стартовых карточек
 const cardList = new Section({
 	items: initialCards,
 	renderer: (item) => {
-		const card = createCard(item)
+		const card = createCard({place: item.name, ...item})
 		cardList.addItem(card)
 	}
 }, cardsListSelector)
-
+// Отрисовка стартовых карточек
 cardList.renderElements()
 
-const formAddCard = new PopupWithForm(popupElements.addCard, handleAddCardFormSubmit)
-
-// Заполним значения полей ввода перед инициализацией валидации, чтобы кнопка не блокировалась
-formEditProfileElements.name.value = profileElements.name.textContent
-formEditProfileElements.about.value = profileElements.about.textContent
+// Создаем объект всплывающего окна с формой добавления карточки
+const popupAddCard = new PopupWithForm(popupAddCardSelector, handleAddCardFormSubmit)
 
 // Включаем валидацию
-forms.forEach(form => {
-	const validator = new FormValidator(validateOptions, form)
-	validator.enableValidation()
-})
+const popupElement = popupAddCard.getElement()
+const formEl = popupElement.querySelector('.form_type_add-card')
+const validatorAddForm = new FormValidator(validateOptions, formEl)
+validatorAddForm.enableValidation()
 
 // Инициализация слушателей событий
 formEditProfileElements.form.addEventListener('submit', handleProfileFormSubmit)
 buttonElements.editProfile.addEventListener('click', openEditProfilePopup)
-buttonElements.addCard.addEventListener('click', () => formAddCard.open())
+buttonElements.addCard.addEventListener('click', () => {
+	validatorAddForm.toggleButtonState()
+	popupAddCard.open()
+})

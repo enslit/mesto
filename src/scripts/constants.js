@@ -1,10 +1,10 @@
 import {Popup} from '../components/Popup.js'
 import {PopupPreviewImage} from '../components/PopupPreviewImage.js'
 // Объекты всплывающих окон редактирования профиля и добавления карточки
-const editProfile = new Popup('.popup_type_edit-profile')
-const previewPicture = new PopupPreviewImage('.popup_type_image')
+const popupEditProfile = new Popup('.popup_type_edit-profile')
+const popupPreviewPicture = new PopupPreviewImage('.popup_type_image')
 // Элементы всплывающих окон
-const popupEditProfileElement = editProfile.getElement()
+const popupEditProfileElement = popupEditProfile.getElement()
 // Элементы блока профиля
 const profile = document.querySelector('.profile')
 const name = profile.querySelector('.profile__name')
@@ -21,11 +21,10 @@ const inputAbout = formEditProfile.querySelector('.form__input_type_about')
 // Cелектор списка карточек
 export const cardsListSelector = '.cards__list'
 
-// Элементы всех форм на странице
-export const forms = Array.from(document.querySelectorAll('.form'))
-
 // Селектор шаблона карточки
 export const cardTemplateSelector = '#cardTemplate'
+
+export const popupAddCardSelector = '.popup_type_add-card'
 
 // Элементы формы редактирования профиля
 export const formEditProfileElements = {
@@ -39,9 +38,9 @@ export const profileElements = {name, about}
 
 // Всплывающие окна
 export const popupElements = {
-  editProfile,
-  addCard: '.popup_type_add-card',
-  previewPicture}
+  editProfile: popupEditProfile,
+  previewPicture: popupPreviewPicture,
+}
 
 // Кнопки
 export const buttonElements = {
