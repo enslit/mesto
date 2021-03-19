@@ -1,4 +1,4 @@
-import {PopupPreviewImage} from '../components/PopupPreviewImage.js'
+import {PopupWithImage} from '../components/PopupWithImage.js'
 import {UserInfo} from '../components/UserInfo'
 
 // Селекторы
@@ -18,7 +18,7 @@ export const selectors = {
 
 // Классы
 export const userInfo = new UserInfo({name: '.profile__name', about: '.profile__about'}) // Информация профиля
-export const popupPreviewPicture = new PopupPreviewImage('.popup_type_image') // Всплывающее окно с изображением
+export const popupPreviewPicture = new PopupWithImage('.popup_type_image') // Всплывающее окно с изображением
 
 // Элементы
 export const buttonEditProfile = document.querySelector('.btn_type_edit-profile') // Кнопка добавления редактирования профиля

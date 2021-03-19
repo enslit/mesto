@@ -4,7 +4,7 @@ import {Popup} from './Popup.js'
  * @class
  * @classdesc Дочерний класс для работы с всплывающим окном просмотра изображения
 */
-export class PopupPreviewImage extends Popup {
+export class PopupWithImage extends Popup {
   constructor(selector) {
     super(selector);
     // Получим вложенные элементы изображения и подписи
