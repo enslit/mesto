@@ -5,7 +5,7 @@
 class Card {
   constructor(data, selector, cb) {
     this._selector = selector
-    this._name = data.name
+    this._name = data.place
     this._link = data.link
     this._callback = cb
     this._isLiked = false
