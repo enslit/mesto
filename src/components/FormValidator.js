@@ -47,7 +47,7 @@ class FormValidator {
   }
 
   // Смена состояния кнопки отправки формы
-  _toggleButtonState() {
+  toggleButtonState() {
     // Если есть невалидные поля в форме, блокируем кнопку
     if (this._hasInvalidInput(this._inputs)) {
       this._submitButton.classList.add(this._inactiveButtonClass)
@@ -66,14 +66,14 @@ class FormValidator {
         // Проверяем валидацию поля ввода
         this._checkValidity(input)
         // На каждом событии определяем состояние кнопки
-        this._toggleButtonState()
+        this.toggleButtonState()
       })
     })
   }
 
   // Включение валидации
   enableValidation() {
-    this._toggleButtonState()
+    this.toggleButtonState()
     this._setListeners()
   }
 }
