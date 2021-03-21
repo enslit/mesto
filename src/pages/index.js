@@ -81,8 +81,17 @@ api.getMe()
 		userInfo.setUserInfo(data)
 	})
 
-// api.getInitialCards()
-// 	.then(cards => console.log(cards))
+api.getInitialCards()
+	.then(cards => {
+		cardList.setItems(cards.reverse())
+		cardList.renderElements()
+	})
+	.catch((err) => {
+		console.error(err.message || err.toString())
+	})
+	.finally(() => {
+		console.log('loading initial cards finally')
+	})
 
 // Инициализация слушателей событий
 buttonEditProfile.addEventListener('click', openEditProfile)
