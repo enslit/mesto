@@ -5,8 +5,9 @@
 class Card {
   constructor(data, selector, cb) {
     this._selector = selector
-    this._name = data.place
+    this._name = data.name
     this._link = data.link
+    this._likes = data.likes.length || 0
     this._callback = cb
     this._isLiked = false
   }
@@ -58,11 +59,13 @@ class Card {
 
     const title = cardElement.querySelector('.card__title')
     const image = cardElement.querySelector('.card__image')
+    const likeCount = cardElement.querySelector('.card__like-cnt')
 
     // Заполним заголовок и адрес изображения
     title.textContent = this._name
     image.src = this._link
     image.alt = this._name
+    likeCount.textContent = this._likes || ''
 
     return cardElement
   }
