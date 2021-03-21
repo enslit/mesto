@@ -11,6 +11,18 @@ export default class PopupWithForm extends Popup{
     this._cb = callbackSubmit; // Колбек события сабмита
   }
 
+  showError(textError) {
+    const error = document.createElement('div');
+    error.classList.add('form__error');
+    error.textContent = textError;
+    this._error = error;
+    this._form.insertAdjacentElement('afterend', error);
+  }
+
+  removeError() {
+    this._error.remove();
+  }
+
   // Получение данных полей ввода
   _getInputValues() {
     const values = {};
@@ -55,6 +67,7 @@ export default class PopupWithForm extends Popup{
 
   close() {
     super.close();
+    this.removeError();
     // выполним сброс формы после закрытия
     this._form.reset();
   }
