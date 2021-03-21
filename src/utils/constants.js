@@ -17,7 +17,7 @@ export const selectors = {
 }
 
 // Классы
-export const userInfo = new UserInfo({name: '.profile__name', about: '.profile__about'}) // Информация профиля
+export const userInfo = new UserInfo({name: '.profile__name', about: '.profile__about', avatar: '.profile__avatar'}) // Информация профиля
 export const popupPreviewPicture = new PopupWithImage('.popup_type_image') // Всплывающее окно с изображением
 
 // Элементы

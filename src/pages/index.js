@@ -11,6 +11,7 @@ import {
 	buttonEditProfile
 } from '../utils/constants.js'
 import './index.css'
+import {Api} from '../utils/Api'
 
 // Callback обработчика клика на изображение
 export const openPreviewPicture = (data) => popupPreviewPicture.open(data)
@@ -66,6 +67,22 @@ const validatorEditProfile = enableValidation(popupEditProfile, selectors.valida
 
 // Отрисовка стартовых карточек
 cardList.renderElements()
+
+const api = new Api({
+	baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-21',
+	headers: {
+		authorization: '52186c90-0ae5-45bb-99b5-e4acaa2b939f',
+		'Content-Type': 'application/json',
+	}
+})
+
+api.getMe()
+	.then(data => {
+		userInfo.setUserInfo(data)
+	})
+
+// api.getInitialCards()
+// 	.then(cards => console.log(cards))
 
 // Инициализация слушателей событий
 buttonEditProfile.addEventListener('click', openEditProfile)
