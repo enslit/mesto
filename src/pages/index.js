@@ -1,8 +1,8 @@
-import Card from '../components/Card.js'
-import FormValidator from '../components/FormValidator.js'
+import {Api} from '../utils/Api'
+import Card from '../components/Card'
+import FormValidator from '../components/FormValidator'
 import PopupWithForm from '../components/PopupWithForm'
-import Section from '../components/Section.js'
-import {initialCards} from '../utils/cards.js'
+import Section from '../components/Section'
 import {
 	userInfo,
 	popupPreviewPicture,
@@ -11,16 +11,39 @@ import {
 	buttonEditProfile
 } from '../utils/constants.js'
 import './index.css'
-import {Api} from '../utils/Api'
 
 // Callback обработчика клика на изображение
 export const openPreviewPicture = (data) => popupPreviewPicture.open(data)
 
 // Обработчик события отправки формы редактирования профиля. Устанавливает данные профиля
-const handleProfileFormSubmit = (values) => userInfo.setUserInfo(values)
+const handleProfileFormSubmit = (values) => {
+	api.updateProfile(values)
+		.then((newData) => {
+			userInfo.setUserInfo(newData)
+			popupEditProfile.close()
+		})
+		.catch((err) => {
+			popupEditProfile.showError(err.message || err.toString())
+		})
+		.finally(() => {
+			popupEditProfile.setLoading(false)
+		})
+}
 
 // Обработчик события отправки формы добавления новой карточки. Добавляет новую в начало секции
-const handleAddCardFormSubmit = (values) => cardList.addItem(createCard(values))
+const handleAddCardFormSubmit = (values) => {
+	api.postCard(values)
+		.then((newCard) => {
+			cardList.addItem(createCard(newCard))
+			popupAddCard.close()
+		})
+		.catch((err) => {
+			popupAddCard.showError(err.message || err.toString())
+		})
+		.finally(() => {
+			popupAddCard.setLoading(false)
+		})
+}
 
 // Обработчик клика на кнопку открытия всплывающего окна редактирования профиля
 const openEditProfile = () => {
@@ -36,9 +59,9 @@ const openAddCard = () => {
 }
 
 // Создает новую карточку карточку
-const createCard = (cardData) => (
-	new Card(cardData, selectors.cardTemplate, openPreviewPicture).getCard()
-)
+const createCard = (cardData) => {
+	return new Card(cardData, selectors.cardTemplate, openPreviewPicture).getCard()
+}
 
 // Включает валидацию формы
 const enableValidation = (popup, options) => {
@@ -50,9 +73,8 @@ const enableValidation = (popup, options) => {
 
 // Создаем объект секции стартовых карточек
 const cardList = new Section({
-	items: initialCards,
 	renderer: (item) => {
-		const card = createCard({place: item.name, ...item})
+		const card = createCard(item)
 		cardList.addItem(card)
 	}
 }, selectors.cardsList)
@@ -65,9 +87,6 @@ const popupEditProfile = new PopupWithForm(selectors.popupEditProfile, handlePro
 const validatorAddForm = enableValidation(popupAddCard, selectors.validateOptions)
 const validatorEditProfile = enableValidation(popupEditProfile, selectors.validateOptions)
 
-// Отрисовка стартовых карточек
-cardList.renderElements()
-
 const api = new Api({
 	baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-21',
 	headers: {
@@ -79,6 +98,12 @@ const api = new Api({
 api.getMe()
 	.then(data => {
 		userInfo.setUserInfo(data)
+	})
+	.catch((err) => {
+		console.error(err.message || err.toString())
+	})
+	.finally(() => {
+		console.log('loading personal info finally')
 	})
 
 api.getInitialCards()
