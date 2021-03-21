@@ -25,7 +25,6 @@ export class Api {
         }
         return res.json();
       })
-      .catch((err) => console.error(err.message))
   }
 
   getMe() {
@@ -37,7 +36,7 @@ export class Api {
   }
 
   updateProfile(data) {
-    return this._fetch('/users/me', 'PATCH', data)
+    return this._fetch('users/me', 'PATCH', data)
   }
 
   postCard(card) {
