@@ -58,7 +58,6 @@ export default class PopupWithForm extends Popup{
     this.setLoading(true);
     // вызываем колбек и передаем данные формы
     this._cb(this._getInputValues());
-    this.close();
   }
 
   // Установка слушателя сабмита
