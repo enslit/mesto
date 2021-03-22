@@ -76,7 +76,9 @@ export default class PopupWithForm extends Popup{
 
   close() {
     super.close();
-    this.removeError();
+    if (this._error) {
+      this.removeError();
+    }
     // выполним сброс формы после закрытия
     this._form.reset();
   }
