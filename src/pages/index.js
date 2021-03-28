@@ -60,7 +60,12 @@ const openAddCard = () => {
 
 // Создает новую карточку карточку
 const createCard = (cardData) => {
-	return new Card(cardData, selectors.cardTemplate, openPreviewPicture).getCard()
+	const card = new Card(cardData, selectors.cardTemplate, {
+		userId: userInfo.getId(),
+		handleClickImage: openPreviewPicture,
+		api,
+	})
+	return card.getCard()
 }
 
 // Включает валидацию формы

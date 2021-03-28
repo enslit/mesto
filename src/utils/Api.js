@@ -42,4 +42,12 @@ export class Api {
   postCard(card) {
     return this._fetch('cards', 'POST', card)
   }
+
+  delete(id) {
+    return this._fetch(`cards/${id}`, 'DELETE')
+  }
+
+  like(id, like = true) {
+    return this._fetch(`cards/likes/${id}`, like ? 'PUT' : 'DELETE')
+  }
 }
