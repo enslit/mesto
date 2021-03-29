@@ -1,5 +1,15 @@
 import {PopupWithImage} from '../components/PopupWithImage.js'
 import {UserInfo} from '../components/UserInfo'
+import {Api} from './Api'
+
+// API backend
+export const api = new Api({
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-21',
+  headers: {
+    authorization: '52186c90-0ae5-45bb-99b5-e4acaa2b939f',
+    'Content-Type': 'application/json',
+  }
+})
 
 // Селекторы
 export const selectors = {

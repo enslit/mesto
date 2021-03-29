@@ -1,5 +1,8 @@
 import {Popup} from './Popup'
-
+/**
+ * @class
+ * @classdesc Дочерний класс для работы с всплывающим окном содержащим запрос подтверждения
+ */
 export class PopupWithConfirm extends Popup{
   constructor(selector, callback) {
     super(selector)
