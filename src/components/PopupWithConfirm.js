@@ -8,7 +8,7 @@ export class PopupWithConfirm extends Popup{
     super(selector)
     this._callback = callback
     this._form = super.getElement().querySelector('.form')
-    this._idElement = super.getElement().querySelector('.form__input_type_card-id')
+    this._idElement = super.getElement().querySelector('.form__input_type_id')
     this._submitButton = super.getElement().querySelector('.form__save')
   }
 
