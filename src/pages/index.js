@@ -11,9 +11,24 @@ import {
 	buttonEditProfile
 } from '../utils/constants.js'
 import './index.css'
+import {PopupWithConfirm} from '../components/PopupWithConfirm'
 
 // Callback обработчика клика на изображение
-export const openPreviewPicture = (data) => popupPreviewPicture.open(data)
+const openPreviewPicture = (data) => popupPreviewPicture.open(data)
+// Callback обработчика клика на иконку удаления карточки
+const openConfirmDelete = (id, listItem) => popupWidthConfirm.open(id, listItem)
+
+// Обработчик события отправки формы удаления карточки
+const handleConfirmDelete = (id, listItem) => {
+	popupWidthConfirm.setLoading(true)
+	api.delete(id)
+		.then(() => {
+			listItem.remove()
+			popupWidthConfirm.close()
+		})
+		.catch(err => console.error(err))
+		.finally(() => popupWidthConfirm.setLoading(false))
+}
 
 // Обработчик события отправки формы редактирования профиля. Устанавливает данные профиля
 const handleProfileFormSubmit = (values) => {
@@ -63,6 +78,7 @@ const createCard = (cardData) => {
 	const card = new Card(cardData, selectors.cardTemplate, {
 		userId: userInfo.getId(),
 		handleClickImage: openPreviewPicture,
+		handleClickDelete: openConfirmDelete,
 		api,
 	})
 	return card.getCard()
@@ -87,6 +103,7 @@ const cardList = new Section({
 // Создаем объекты всплывающего окна с формой
 const popupAddCard = new PopupWithForm(selectors.popupAddCard, handleAddCardFormSubmit)
 const popupEditProfile = new PopupWithForm(selectors.popupEditProfile, handleProfileFormSubmit)
+const popupWidthConfirm = new PopupWithConfirm(selectors.popupDeleteCard, handleConfirmDelete)
 
 // Включаем валидацию
 const validatorAddForm = enableValidation(popupAddCard, selectors.validateOptions)

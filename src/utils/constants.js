@@ -7,6 +7,7 @@ export const selectors = {
   cardTemplate: '#cardTemplate', // шаблон карточки
   popupAddCard: '.popup_type_add-card', // всплывающее окно добавления новой карточки
   popupEditProfile: '.popup_type_edit-profile', // всплывающее окно редактирования информации
+  popupDeleteCard: '.popup_type_delete', // всплывающее окно уведомления удаления карточки
   validateOptions: {
     inputSelector: '.form__input', // Поле ввода
     submitButtonSelector: '.form__save', // Кнопка отправки формы

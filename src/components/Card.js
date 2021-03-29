@@ -7,6 +7,7 @@ class Card {
     this._selector = selector
 
     this._callbackClickImage = options.handleClickImage
+    this._callbackDeleteCard = options.handleClickDelete
     this._api = options.api
 
     this._id = data._id
@@ -68,7 +69,8 @@ class Card {
 
   // Слушатель клика на кнопку удаления карточки
   _handleDeleteCard(evt) {
-    evt.target.closest('.cards__list-item').remove()
+    const listItem = evt.target.closest('.cards__list-item')
+    this._callbackDeleteCard(this._id, listItem)
   }
 
   // Слушатель клика на изображение
@@ -88,6 +90,12 @@ class Card {
 
     const image = cardElement.querySelector('.card__image')
     image.addEventListener('click', this._handlePreviewPicture.bind(this))
+
+    if (this._canDelete) {
+      const deleteButton = cardElement.querySelector('.btn_type_delete')
+      deleteButton.classList.remove('card__delete_hidden')
+      deleteButton.addEventListener('click', this._handleDeleteCard.bind(this))
+    }
   }
 
   // Возвращает готовую для вставки карточку
@@ -97,7 +105,6 @@ class Card {
 
     const title = cardElement.querySelector('.card__title')
     const image = cardElement.querySelector('.card__image')
-    const likeCount = cardElement.querySelector('.card__like-cnt')
 
     // Заполним заголовок и адрес изображения
     title.textContent = this._name

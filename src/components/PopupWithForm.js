@@ -10,7 +10,6 @@ export default class PopupWithForm extends Popup{
     this._form = super.getElement().querySelector('.form'); // Элемент формы внутри всплывающего окна
     this._submitButton = this._form.querySelector('.form__save');
     this._cb = callbackSubmit; // Колбек события сабмита
-    this._isLoading = false;
   }
 
   showError(textError) {
@@ -36,7 +35,6 @@ export default class PopupWithForm extends Popup{
   }
 
   setLoading(state) {
-    this._isLoading = state;
     this._submitButton.textContent = state ? 'Сохранение...' : 'Сохранить';
   }
 

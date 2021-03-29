@@ -29,6 +29,7 @@
 
 @import "../blocks/card/card.css";
 @import "../blocks/card/__delete/card__delete.css";
+@import "../blocks/card/__delete/_hidden/card__delete_hidden.css";
 @import "../blocks/card/__image/card__image.css";
 @import "../blocks/card/__description/card__desription.css";
 @import "../blocks/card/__title/card__title.css";

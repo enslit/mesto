@@ -10,6 +10,10 @@ export class UserInfo {
     this._id = null
   }
 
+  getId() {
+    return this._id
+  }
+
   // Получить данные профиля
   getUserInfo() {
     return {
