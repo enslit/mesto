@@ -15,6 +15,7 @@ import {PopupWithConfirm} from '../components/PopupWithConfirm'
 
 // Callback обработчика клика на изображение
 const openPreviewPicture = (data) => popupPreviewPicture.open(data)
+
 // Callback обработчика клика на иконку удаления карточки
 const openConfirmDelete = (id, listItem) => popupWidthConfirm.open(id, listItem)
 
@@ -43,6 +44,16 @@ const handleProfileFormSubmit = (values) => {
 		.finally(() => {
 			popupEditProfile.setLoading(false)
 		})
+}
+
+// Обработчик клика на кнопку лайк
+const handleClickLike = ({id, isLiked}, cardApi) => {
+	api.like(id, !isLiked)
+	  .then(({likes}) => {
+		  cardApi.toggleLike()
+	    cardApi.renderCountLikes(likes)
+	  })
+	  .catch(err => console.error(err))
 }
 
 // Обработчик события отправки формы добавления новой карточки. Добавляет новую в начало секции
@@ -79,7 +90,7 @@ const createCard = (cardData) => {
 		userId: userInfo.getId(),
 		handleClickImage: openPreviewPicture,
 		handleClickDelete: openConfirmDelete,
-		api,
+		handleClickLike
 	})
 	return card.getCard()
 }

@@ -8,7 +8,7 @@ class Card {
 
     this._callbackClickImage = options.handleClickImage
     this._callbackDeleteCard = options.handleClickDelete
-    this._api = options.api
+    this._callbackClickLike = options.handleClickLike
 
     this._id = data._id
     this._name = data.name
@@ -17,6 +17,10 @@ class Card {
 
     this._isLiked = this._checkIsLiked(options.userId, data)
     this._canDelete = this._checkCanDelete(options.userId, data)
+
+    this._cardElement = this._getTemplate()
+    this._likeCount = this._cardElement.querySelector('.card__like-cnt')
+    this._likeButton = this._cardElement.querySelector('.btn_type_like')
   }
 
   // Возвращает клон шаблона
@@ -41,30 +45,22 @@ class Card {
     return false
   }
 
-  _renderCountLikes(likes, cardElement) {
-    const likeCount = cardElement.querySelector('.card__like-cnt')
-
-    likeCount.textContent = likes.length || ''
+  renderCountLikes(likes) {
+    this._likeCount.textContent = likes.length || ''
   }
 
-  _toggleLike(cardElement) {
-    const button = cardElement.querySelector('.btn_type_like')
-
+  toggleLike() {
     this._isLiked = !this._isLiked
-    button.classList.toggle('btn_type_like-active')
+    this._likeButton.classList.toggle('btn_type_like-active')
   }
 
   // Слушатель клика на кнопку лайк
-  _handleLikeCard(evt) {
-    const card = evt.target.closest('.card')
-
-    this._api.like(this._id, !this._isLiked)
-      .then(({likes}) => {
-        this._likes = likes
-        this._toggleLike(card)
-        this._renderCountLikes(this._likes, card)
-      })
-      .catch(err => console.log(err))
+  _handleLikeCard() {
+    const cardData = {
+      id: this._id,
+      isLiked: this._isLiked
+    }
+    this._callbackClickLike(cardData, this)
   }
 
   // Слушатель клика на кнопку удаления карточки
@@ -98,13 +94,16 @@ class Card {
     }
   }
 
+  getElement() {
+    return this._cardElement
+  }
+
   // Возвращает готовую для вставки карточку
   getCard() {
-    const cardElement = this._getTemplate()
-    this._setListeners(cardElement)
+    this._setListeners(this._cardElement)
 
-    const title = cardElement.querySelector('.card__title')
-    const image = cardElement.querySelector('.card__image')
+    const title = this._cardElement.querySelector('.card__title')
+    const image = this._cardElement.querySelector('.card__image')
 
     // Заполним заголовок и адрес изображения
     title.textContent = this._name
@@ -112,13 +111,13 @@ class Card {
     image.alt = this._name
     // Если есть лайк пользователя
     if (this._isLiked) {
-      const likeButton = cardElement.querySelector('.btn_type_like')
+      const likeButton = this._cardElement.querySelector('.btn_type_like')
       likeButton.classList.add('btn_type_like-active')
     }
     // Отображение количества лайков
-    this._renderCountLikes(this._likes, cardElement)
+    this.renderCountLikes(this._likes)
 
-    return cardElement
+    return this._cardElement
   }
 }
 
