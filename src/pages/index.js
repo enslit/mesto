@@ -8,7 +8,8 @@ import {
 	popupPreviewPicture,
 	selectors,
 	buttonAddCard,
-	buttonEditProfile
+	buttonEditProfile,
+	avatar,
 } from '../utils/constants.js'
 import './index.css'
 import {PopupWithConfirm} from '../components/PopupWithConfirm'
@@ -71,6 +72,17 @@ const handleAddCardFormSubmit = (values) => {
 		})
 }
 
+// Обработчик события отправки формы обновления аватара
+const handleUpdateAvatarSubmit = (values) => {
+	api.updateAvatar(values)
+		.then(res => {
+			userInfo.setUserInfo(res)
+			popupUpdateAvatar.close()
+		})
+		.catch(err => console.error(err))
+		.finally(() => popupUpdateAvatar.setLoading(false))
+}
+
 // Обработчик клика на кнопку открытия всплывающего окна редактирования профиля
 const openEditProfile = () => {
 	popupEditProfile.setInitValues(userInfo.getUserInfo())
@@ -82,6 +94,12 @@ const openEditProfile = () => {
 const openAddCard = () => {
 	validatorAddForm.toggleButtonState() // Выполняется сброс состояния кнопки
 	popupAddCard.open()
+}
+
+// Обработчик клика на аватар
+const openUpdateAvatar = () => {
+	validatorUpdateAvatar.toggleButtonState()
+	popupUpdateAvatar.open()
 }
 
 // Создает новую карточку карточку
@@ -114,11 +132,13 @@ const cardList = new Section({
 // Создаем объекты всплывающего окна с формой
 const popupAddCard = new PopupWithForm(selectors.popupAddCard, handleAddCardFormSubmit)
 const popupEditProfile = new PopupWithForm(selectors.popupEditProfile, handleProfileFormSubmit)
+const popupUpdateAvatar = new PopupWithForm(selectors.popupUpdateAvatar, handleUpdateAvatarSubmit)
 const popupWidthConfirm = new PopupWithConfirm(selectors.popupDeleteCard, handleConfirmDelete)
 
 // Включаем валидацию
 const validatorAddForm = enableValidation(popupAddCard, selectors.validateOptions)
 const validatorEditProfile = enableValidation(popupEditProfile, selectors.validateOptions)
+const validatorUpdateAvatar = enableValidation(popupUpdateAvatar, selectors.validateOptions)
 
 const api = new Api({
 	baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-21',
@@ -154,3 +174,4 @@ api.getInitialCards()
 // Инициализация слушателей событий
 buttonEditProfile.addEventListener('click', openEditProfile)
 buttonAddCard.addEventListener('click', openAddCard)
+avatar.addEventListener('click', openUpdateAvatar)

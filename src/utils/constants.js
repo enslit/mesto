@@ -8,6 +8,7 @@ export const selectors = {
   popupAddCard: '.popup_type_add-card', // всплывающее окно добавления новой карточки
   popupEditProfile: '.popup_type_edit-profile', // всплывающее окно редактирования информации
   popupDeleteCard: '.popup_type_delete', // всплывающее окно уведомления удаления карточки
+  popupUpdateAvatar: '.popup_type_update-profile', // всплывающее окно формы обновления аватара
   validateOptions: {
     inputSelector: '.form__input', // Поле ввода
     submitButtonSelector: '.form__save', // Кнопка отправки формы
@@ -24,3 +25,4 @@ export const popupPreviewPicture = new PopupWithImage('.popup_type_image') // В
 // Элементы
 export const buttonEditProfile = document.querySelector('.btn_type_edit-profile') // Кнопка добавления редактирования профиля
 export const buttonAddCard = document.querySelector('.btn_type_add-card') // Кнопка добавления новой карточки
+export const avatar = document.querySelector('.profile__avatar-wrapper') // Аватар

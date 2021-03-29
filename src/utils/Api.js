@@ -50,4 +50,8 @@ export class Api {
   like(id, like = true) {
     return this._fetch(`cards/likes/${id}`, like ? 'PUT' : 'DELETE')
   }
+
+  updateAvatar(data) {
+    return this._fetch(`users/me/avatar`, 'PATCH', data)
+  }
 }
