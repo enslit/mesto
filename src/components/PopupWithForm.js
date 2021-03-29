@@ -8,6 +8,7 @@ export default class PopupWithForm extends Popup{
   constructor(selector, callbackSubmit) {
     super(selector);
     this._form = super.getElement().querySelector('.form'); // Элемент формы внутри всплывающего окна
+    this._submitButton = this._form.querySelector('.form__save');
     this._cb = callbackSubmit; // Колбек события сабмита
   }
 
@@ -21,12 +22,18 @@ export default class PopupWithForm extends Popup{
     return values;
   }
 
+  setLoading(state) {
+    this._submitButton.textContent = state ? 'Сохранение...' : 'Сохранить';
+  }
+
   // Установка значений полей ввода
   setInitValues(values) {
     for (let value in values) {
       if (values.hasOwnProperty(value)) {
         const el = this._form.querySelector(`.form__input_type_${value}`)
-        el.value = values[value]
+        if (el) {
+          el.value = values[value]
+        }
       }
     }
   }
@@ -34,9 +41,9 @@ export default class PopupWithForm extends Popup{
   // Обработчик сабмита формы
   _handleSubmitForm(evt) {
     evt.preventDefault();
+    this.setLoading(true);
     // вызываем колбек и передаем данные формы
     this._cb(this._getInputValues());
-    this.close();
   }
 
   // Установка слушателя сабмита

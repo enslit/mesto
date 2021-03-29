@@ -9,6 +9,10 @@ export default class Section {
     this._renderer = renderer; // Колбек отрисовки
   }
 
+  setItems(items) {
+    this._items = items;
+  }
+
   // Добавление элемента в секцию
   addItem(element) {
     this._containerElement.prepend(element);

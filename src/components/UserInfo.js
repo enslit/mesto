@@ -6,6 +6,12 @@ export class UserInfo {
   constructor(selectors) {
     this._name = document.querySelector(selectors.name)
     this._about = document.querySelector(selectors.about)
+    this._avatarUrl = document.querySelector(selectors.avatar)
+    this._id = null
+  }
+
+  getId() {
+    return this._id
   }
 
   // Получить данные профиля
@@ -13,12 +19,16 @@ export class UserInfo {
     return {
       name: this._name.textContent,
       about: this._about.textContent,
+      avatar: this._avatarUrl.src,
+      _id: this._id
     }
   }
 
   // Установить данные профиля
-  setUserInfo({userName, about}) {
-    this._name.textContent = userName
-    this._about.textContent = about
+  setUserInfo(data) {
+    this._name.textContent = data.name
+    this._about.textContent = data.about
+    this._avatarUrl.src = data.avatar
+    this._id = data._id
   }
 }
