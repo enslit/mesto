@@ -20,6 +20,7 @@
 
 @import "../blocks/profile/profile.css";
 @import "../blocks/profile/__avatar/profile__avatar.css";
+@import "../blocks/profile/__avatar-wrapper/profile__avatar-wrapper.css";
 @import "../blocks/profile/__details/profile__details.css";
 @import "../blocks/profile/__text/profile__text.css";
 @import "../blocks/profile/__name/profile__name.css";
