@@ -12,4 +12,4 @@
 * Native javascript
 * Webpack
 
-[Проект на Github Pages](https://enslit.github.io/mesto/)
+[Проект на Github Pages](https://enslit.github.io/mesto/index.html)
