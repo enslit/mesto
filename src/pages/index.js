@@ -140,19 +140,14 @@ const validatorAddForm = enableValidation(popupAddCard, selectors.validateOption
 const validatorEditProfile = enableValidation(popupEditProfile, selectors.validateOptions)
 const validatorUpdateAvatar = enableValidation(popupUpdateAvatar, selectors.validateOptions)
 
-// Загрузка данных профиля
-api.getMe()
-	.then(data => {
-		userInfo.setUserInfo(data)
-	})
-	.catch((err) => {
-		console.error(err.message)
-	})
-
-// Инициализация карточек
-api.getInitialCards()
-	.then(cards => {
-		cardList.setItems(cards.reverse())
+// Загрузка данных профиля и списка карточек
+Promise.all([
+	api.getMe(),
+	api.getInitialCards()
+])
+	.then(([userData, initialCards]) => {
+		userInfo.setUserInfo(userData)
+		cardList.setItems(initialCards.reverse())
 		cardList.renderElements()
 	})
 	.catch((err) => {
